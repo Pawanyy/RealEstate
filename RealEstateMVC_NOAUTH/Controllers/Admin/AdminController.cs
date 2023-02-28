@@ -48,6 +48,11 @@ namespace RealEstateMVC_NOAUTH.Controllers
 
         public ActionResult Dashboard()
         {
+            if (Session.Count <= 0 || !Session["Type"].Equals("Admin"))
+            {
+                return RedirectToAction("Index");
+            }
+
             return View();
         }
 
