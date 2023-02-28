@@ -25,7 +25,7 @@ namespace RealEstateMVC_NOAUTH.Models
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Country Name")]
+        [Display(Name = "Country")]
         public string NAME { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

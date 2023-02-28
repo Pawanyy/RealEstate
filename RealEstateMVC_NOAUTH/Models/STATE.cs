@@ -25,7 +25,7 @@ namespace RealEstateMVC_NOAUTH.Models
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "State Name")]
+        [Display(Name = "State")]
         public string NAME { get; set; }
         public int COUNTRY_ID { get; set; }
     
