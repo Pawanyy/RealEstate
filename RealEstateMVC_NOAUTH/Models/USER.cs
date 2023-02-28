@@ -11,15 +11,40 @@ namespace RealEstateMVC_NOAUTH.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.Runtime.InteropServices;
+
     public partial class USER
     {
         public int ID { get; set; }
+
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email")]
         public string EMAIL { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
         public string PASSWORD { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Full Name")]
         public string FULLNAME { get; set; }
+
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Mobile")]
         public string MOBILE { get; set; }
+
+        [Required]
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "About Me")]
         public string ABOUT_ME { get; set; }
+
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Registration Date")]
         public Nullable<System.DateTime> REGISTRATION_DATE { get; set; }
     }
 }

@@ -46,10 +46,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,EMAIL,PASSWORD,FULLNAME,MOBILE,ABOUT_ME,REGISTRATION_DATE")] USER uSER)
+        public ActionResult Create([Bind(Include = "ID,EMAIL,PASSWORD,FULLNAME,MOBILE,ABOUT_ME")] USER uSER)
         {
             if (ModelState.IsValid)
             {
+                uSER.REGISTRATION_DATE = DateTime.Now;
                 db.USERS.Add(uSER);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -78,10 +79,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,EMAIL,PASSWORD,FULLNAME,MOBILE,ABOUT_ME,REGISTRATION_DATE")] USER uSER)
+        public ActionResult Edit([Bind(Include = "ID,EMAIL,PASSWORD,FULLNAME,MOBILE,ABOUT_ME")] USER uSER)
         {
             if (ModelState.IsValid)
             {
+                uSER.REGISTRATION_DATE = DateTime.Now;
                 db.Entry(uSER).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
