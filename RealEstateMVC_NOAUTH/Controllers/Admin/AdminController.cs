@@ -1,6 +1,7 @@
 ﻿using RealEstateMVC_NOAUTH.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.ModelBinding;
@@ -54,6 +55,37 @@ namespace RealEstateMVC_NOAUTH.Controllers
             }
 
             return View();
+        }
+
+        public ActionResult Profile()
+        {
+            if (Session.Count <= 0 || !Session["Type"].Equals("Admin"))
+            {
+                return RedirectToAction("Index");
+            }
+
+            ADMIN aDMIN = db.ADMINs.Find(int.Parse(Session["userId"].ToString()));
+            if (aDMIN != null)
+            {
+                return View(aDMIN);
+            }
+
+            return View("Index");
+
+        }
+
+        [HttpPost]
+        public ActionResult Profile([Bind(Include = "ID,USERNAME,PASSWORD")] ADMIN aDMIN)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(aDMIN).State = EntityState.Modified;
+                db.SaveChanges();
+
+                Session.RemoveAll();
+                return RedirectToAction("Index");
+            }
+            return View(aDMIN);
         }
 
         public ActionResult Logout()
