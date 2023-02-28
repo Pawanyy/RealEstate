@@ -1,0 +1,27 @@
+﻿@model RealEstateMVC_NOAUTH.Models.PROPERTY_TYPE
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PROPERTY_TYPE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PROPERTY_TYPE1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PROPERTY_TYPE1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

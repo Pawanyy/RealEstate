@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="19c572165a854c4c800174aa0c5e0455" Name="Diagram1">
+        <EntityTypeShape EntityType="RealEstateModel.ADMIN" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RealEstateModel.COUNTRY" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="RealEstateModel.FAQ" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RealEstateModel.STATE" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RealEstateModel.USER" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="RealEstateModel.FK__STATE__COUNTRY_I__3D5E1FD2" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="RealEstateModel.CITY" Width="1.5" PointX="5.25" PointY="1" />
+        <AssociationConnector Association="RealEstateModel.FK__CITY__STATE_ID__5CD6CB2B" />
+        <EntityTypeShape EntityType="RealEstateModel.PROPERTY_TYPE" Width="1.5" PointX="0.75" PointY="6.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
