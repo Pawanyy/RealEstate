@@ -131,6 +131,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Admin\AdminController.cs" />
     <Compile Include="Controllers\Admin\CitiesController.cs" />
+    <Compile Include="Controllers\Admin\ContactsController.cs" />
     <Compile Include="Controllers\Admin\CountriesController.cs" />
     <Compile Include="Controllers\Admin\FaqsController.cs" />
     <Compile Include="Controllers\Admin\PropertyTypesController.cs" />
@@ -479,6 +480,8 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shared\_UserLayout.cshtml" />
     <Content Include="Views\Shared\_VendorLayout.cshtml" />
+    <Content Include="Views\Contacts\Delete.cshtml" />
+    <Content Include="Views\Contacts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\User\" />
