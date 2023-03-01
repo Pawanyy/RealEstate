@@ -33,6 +33,7 @@ namespace RealEstateMVC_NOAUTH.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CITY> CITies { get; set; }
+        public virtual COUNTRY COUNTRY { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PROPERTY> PROPERTies { get; set; }
     }

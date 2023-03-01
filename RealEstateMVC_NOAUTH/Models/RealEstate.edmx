@@ -4,63 +4,210 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="RealEstateModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="RealEstateModelStoreContainer" />
-      </Schema></edmx:StorageModels>
-    <!-- CSDL content -->
-    <edmx:ConceptualModels>
-      <Schema Namespace="RealEstateModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+    <Schema Namespace="RealEstateModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ADMIN">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="USERNAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="PASSWORD" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USERNAME" Type="varchar" MaxLength="255" />
+          <Property Name="PASSWORD" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="CITY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="varchar" MaxLength="255" />
+          <Property Name="STATE_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CONTACT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="varchar" MaxLength="255" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="255" />
+          <Property Name="SUBJECT" Type="varchar" MaxLength="255" />
+          <Property Name="PHONE" Type="nchar" MaxLength="10" />
+          <Property Name="MESSAGE" Type="text" />
+          <Property Name="DATE" Type="datetime" />
         </EntityType>
         <EntityType Name="COUNTRY">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="STATEs" Relationship="Self.FK__STATE__COUNTRY_I__3D5E1FD2" FromRole="COUNTRY" ToRole="STATE" />
-          <NavigationProperty Name="PROPERTies" Relationship="RealEstateModel.FK__PROPERTY__COUNTR__778AC167" FromRole="COUNTRY" ToRole="PROPERTY" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="varchar" MaxLength="255" />
         </EntityType>
-        <EntityType Name="FAQ">
+        <EntityType Name="FAQS">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="QUEST" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="ANSWER" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QUEST" Type="text" />
+          <Property Name="ANSWER" Type="text" />
+        </EntityType>
+        <EntityType Name="PROPERTY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="varchar" MaxLength="255" />
+          <Property Name="DESCR" Type="text" />
+          <Property Name="PROPERTY_TYPE_ID" Type="int" />
+          <Property Name="STATUS_ID" Type="int" />
+          <Property Name="LOCATION" Type="varchar" MaxLength="255" />
+          <Property Name="BEDROOMS" Type="int" />
+          <Property Name="BATHROOMS" Type="int" />
+          <Property Name="FLOORS" Type="int" />
+          <Property Name="GARAGES" Type="int" />
+          <Property Name="AREA" Type="nchar" MaxLength="10" />
+          <Property Name="PRICE" Type="float" />
+          <Property Name="BEFORE_PRICE_LABEL" Type="varchar" MaxLength="255" />
+          <Property Name="AFTER_PRICE_LABEL" Type="varchar" MaxLength="255" />
+          <Property Name="FEATURES" Type="text" />
+          <Property Name="IMG_1" Type="text" />
+          <Property Name="IMG_2" Type="text" />
+          <Property Name="IMG_3" Type="text" />
+          <Property Name="IMG_4" Type="text" />
+          <Property Name="ADDRESS" Type="varchar" MaxLength="255" />
+          <Property Name="COUNTRY_ID" Type="int" />
+          <Property Name="STATE_ID" Type="int" />
+          <Property Name="CITY_ID" Type="int" />
+          <Property Name="POSTAL_CODE" Type="nchar" MaxLength="10" />
+          <Property Name="NEIGHBORHOOD" Type="varchar" MaxLength="255" />
+          <Property Name="ADDED_BY_ID" Type="int" />
+          <Property Name="ADDED_DATE" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PROPERTY_STATUS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="STATUS" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="PROPERTY_TYPE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="STATE">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="COUNTRY_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="COUNTRY" Relationship="Self.FK__STATE__COUNTRY_I__3D5E1FD2" FromRole="STATE" ToRole="COUNTRY" />
-          <NavigationProperty Name="CITies" Relationship="RealEstateModel.FK__CITY__STATE_ID__5CD6CB2B" FromRole="STATE" ToRole="CITY" />
-          <NavigationProperty Name="PROPERTies" Relationship="RealEstateModel.FK__PROPERTY__STATE___787EE5A0" FromRole="STATE" ToRole="PROPERTY" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="varchar" MaxLength="255" />
+          <Property Name="COUNTRY_ID" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="USER">
+        <EntityType Name="USER_ROLE">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EMAIL" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PASSWORD" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FULLNAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="MOBILE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="ABOUT_ME" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="REGISTRATION_DATE" Type="DateTime" Precision="3" />
-          <Property Name="ROLE_ID" Type="Int32" />
-          <NavigationProperty Name="PROPERTies" Relationship="RealEstateModel.FK__PROPERTY__ADDED___7E37BEF6" FromRole="USER" ToRole="PROPERTY" />
-          <NavigationProperty Name="USER_ROLE" Relationship="RealEstateModel.FK__USERS__ROLE_ID__02084FDA" FromRole="USER" ToRole="USER_ROLE" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="varchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="USERS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PASSWORD" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="FULLNAME" Type="varchar" MaxLength="255" />
+          <Property Name="MOBILE" Type="nchar" MaxLength="10" />
+          <Property Name="ROLE_ID" Type="int" />
+          <Property Name="ABOUT_ME" Type="text" />
+          <Property Name="REGISTRATION_DATE" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__CITY__STATE_ID__5CD6CB2B">
+          <End Role="STATE" Type="Self.STATE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CITY" Type="Self.CITY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CITY">
+              <PropertyRef Name="STATE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PROPERTY__ADDED___7E37BEF6">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+          <End Role="PROPERTY" Type="Self.PROPERTY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PROPERTY">
+              <PropertyRef Name="ADDED_BY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PROPERTY__CITY_I__797309D9">
+          <End Role="CITY" Type="Self.CITY" Multiplicity="0..1" />
+          <End Role="PROPERTY" Type="Self.PROPERTY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CITY">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PROPERTY">
+              <PropertyRef Name="CITY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PROPERTY__COUNTR__778AC167">
+          <End Role="COUNTRY" Type="Self.COUNTRY" Multiplicity="0..1" />
+          <End Role="PROPERTY" Type="Self.PROPERTY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COUNTRY">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PROPERTY">
+              <PropertyRef Name="COUNTRY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PROPERTY__PROPER__75A278F5">
+          <End Role="PROPERTY_TYPE" Type="Self.PROPERTY_TYPE" Multiplicity="0..1" />
+          <End Role="PROPERTY" Type="Self.PROPERTY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROPERTY_TYPE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PROPERTY">
+              <PropertyRef Name="PROPERTY_TYPE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PROPERTY__STATE___787EE5A0">
+          <End Role="STATE" Type="Self.STATE" Multiplicity="0..1" />
+          <End Role="PROPERTY" Type="Self.PROPERTY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PROPERTY">
+              <PropertyRef Name="STATE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PROPERTY__STATUS__76969D2E">
+          <End Role="PROPERTY_STATUS" Type="Self.PROPERTY_STATUS" Multiplicity="0..1" />
+          <End Role="PROPERTY" Type="Self.PROPERTY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROPERTY_STATUS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PROPERTY">
+              <PropertyRef Name="STATUS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__STATE__COUNTRY_I__3D5E1FD2">
           <End Role="COUNTRY" Type="Self.COUNTRY" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -75,26 +222,87 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="RealEstateEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ADMINs" EntityType="Self.ADMIN" />
-          <EntitySet Name="COUNTRies" EntityType="Self.COUNTRY" />
-          <EntitySet Name="FAQS" EntityType="Self.FAQ" />
-          <EntitySet Name="STATEs" EntityType="Self.STATE" />
-          <EntitySet Name="USERS" EntityType="Self.USER" />
-          <AssociationSet Name="FK__STATE__COUNTRY_I__3D5E1FD2" Association="Self.FK__STATE__COUNTRY_I__3D5E1FD2">
-            <End Role="COUNTRY" EntitySet="COUNTRies" />
-            <End Role="STATE" EntitySet="STATEs" />
+        <Association Name="FK__USERS__ROLE_ID__02084FDA">
+          <End Role="USER_ROLE" Type="Self.USER_ROLE" Multiplicity="0..1" />
+          <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_ROLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USERS">
+              <PropertyRef Name="ROLE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RealEstateModelStoreContainer">
+          <EntitySet Name="ADMIN" EntityType="Self.ADMIN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CITY" EntityType="Self.CITY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CONTACT" EntityType="Self.CONTACT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COUNTRY" EntityType="Self.COUNTRY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FAQS" EntityType="Self.FAQS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROPERTY" EntityType="Self.PROPERTY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROPERTY_STATUS" EntityType="Self.PROPERTY_STATUS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROPERTY_TYPE" EntityType="Self.PROPERTY_TYPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STATE" EntityType="Self.STATE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER_ROLE" EntityType="Self.USER_ROLE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CITY__STATE_ID__5CD6CB2B" Association="Self.FK__CITY__STATE_ID__5CD6CB2B">
+            <End Role="STATE" EntitySet="STATE" />
+            <End Role="CITY" EntitySet="CITY" />
           </AssociationSet>
+          <AssociationSet Name="FK__PROPERTY__ADDED___7E37BEF6" Association="Self.FK__PROPERTY__ADDED___7E37BEF6">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="PROPERTY" EntitySet="PROPERTY" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PROPERTY__CITY_I__797309D9" Association="Self.FK__PROPERTY__CITY_I__797309D9">
+            <End Role="CITY" EntitySet="CITY" />
+            <End Role="PROPERTY" EntitySet="PROPERTY" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PROPERTY__COUNTR__778AC167" Association="Self.FK__PROPERTY__COUNTR__778AC167">
+            <End Role="COUNTRY" EntitySet="COUNTRY" />
+            <End Role="PROPERTY" EntitySet="PROPERTY" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PROPERTY__PROPER__75A278F5" Association="Self.FK__PROPERTY__PROPER__75A278F5">
+            <End Role="PROPERTY_TYPE" EntitySet="PROPERTY_TYPE" />
+            <End Role="PROPERTY" EntitySet="PROPERTY" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PROPERTY__STATE___787EE5A0" Association="Self.FK__PROPERTY__STATE___787EE5A0">
+            <End Role="STATE" EntitySet="STATE" />
+            <End Role="PROPERTY" EntitySet="PROPERTY" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PROPERTY__STATUS__76969D2E" Association="Self.FK__PROPERTY__STATUS__76969D2E">
+            <End Role="PROPERTY_STATUS" EntitySet="PROPERTY_STATUS" />
+            <End Role="PROPERTY" EntitySet="PROPERTY" />
+          </AssociationSet>
+          <AssociationSet Name="FK__STATE__COUNTRY_I__3D5E1FD2" Association="Self.FK__STATE__COUNTRY_I__3D5E1FD2">
+            <End Role="COUNTRY" EntitySet="COUNTRY" />
+            <End Role="STATE" EntitySet="STATE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USERS__ROLE_ID__02084FDA" Association="Self.FK__USERS__ROLE_ID__02084FDA">
+            <End Role="USER_ROLE" EntitySet="USER_ROLE" />
+            <End Role="USERS" EntitySet="USERS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RealEstateModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="RealEstateEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ADMINs" EntityType="RealEstateModel.ADMIN" />
           <EntitySet Name="CITies" EntityType="RealEstateModel.CITY" />
+          <EntitySet Name="CONTACTs" EntityType="RealEstateModel.CONTACT" />
+          <EntitySet Name="COUNTRies" EntityType="RealEstateModel.COUNTRY" />
+          <EntitySet Name="FAQS" EntityType="RealEstateModel.FAQ" />
+          <EntitySet Name="PROPERTies" EntityType="RealEstateModel.PROPERTY" />
+          <EntitySet Name="PROPERTY_STATUS" EntityType="RealEstateModel.PROPERTY_STATUS" />
+          <EntitySet Name="PROPERTY_TYPE" EntityType="RealEstateModel.PROPERTY_TYPE" />
+          <EntitySet Name="STATEs" EntityType="RealEstateModel.STATE" />
+          <EntitySet Name="USER_ROLE" EntityType="RealEstateModel.USER_ROLE" />
+          <EntitySet Name="USERS" EntityType="RealEstateModel.USER" />
           <AssociationSet Name="FK__CITY__STATE_ID__5CD6CB2B" Association="RealEstateModel.FK__CITY__STATE_ID__5CD6CB2B">
             <End Role="STATE" EntitySet="STATEs" />
             <End Role="CITY" EntitySet="CITies" />
           </AssociationSet>
-          <EntitySet Name="PROPERTY_TYPE" EntityType="RealEstateModel.PROPERTY_TYPE" />
-          <EntitySet Name="CONTACTs" EntityType="RealEstateModel.CONTACT" />
-          <EntitySet Name="PROPERTies" EntityType="RealEstateModel.PROPERTY" />
-          <EntitySet Name="PROPERTY_STATUS" EntityType="RealEstateModel.PROPERTY_STATUS" />
-          <EntitySet Name="USER_ROLE" EntityType="RealEstateModel.USER_ROLE" />
           <AssociationSet Name="FK__PROPERTY__CITY_I__797309D9" Association="RealEstateModel.FK__PROPERTY__CITY_I__797309D9">
             <End Role="CITY" EntitySet="CITies" />
             <End Role="PROPERTY" EntitySet="PROPERTies" />
@@ -102,6 +310,10 @@
           <AssociationSet Name="FK__PROPERTY__COUNTR__778AC167" Association="RealEstateModel.FK__PROPERTY__COUNTR__778AC167">
             <End Role="COUNTRY" EntitySet="COUNTRies" />
             <End Role="PROPERTY" EntitySet="PROPERTies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__STATE__COUNTRY_I__3D5E1FD2" Association="RealEstateModel.FK__STATE__COUNTRY_I__3D5E1FD2">
+            <End Role="COUNTRY" EntitySet="COUNTRies" />
+            <End Role="STATE" EntitySet="STATEs" />
           </AssociationSet>
           <AssociationSet Name="FK__PROPERTY__ADDED___7E37BEF6" Association="RealEstateModel.FK__PROPERTY__ADDED___7E37BEF6">
             <End Role="USER" EntitySet="USERS" />
@@ -124,6 +336,14 @@
             <End Role="USER" EntitySet="USERS" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="ADMIN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USERNAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="CITY">
           <Key>
             <PropertyRef Name="ID" />
@@ -133,28 +353,6 @@
           <Property Name="STATE_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="STATE" Relationship="RealEstateModel.FK__CITY__STATE_ID__5CD6CB2B" FromRole="CITY" ToRole="STATE" />
           <NavigationProperty Name="PROPERTies" Relationship="RealEstateModel.FK__PROPERTY__CITY_I__797309D9" FromRole="CITY" ToRole="PROPERTY" />
-        </EntityType>
-        <Association Name="FK__CITY__STATE_ID__5CD6CB2B">
-          <End Type="RealEstateModel.STATE" Role="STATE" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="RealEstateModel.CITY" Role="CITY" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="STATE">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CITY">
-              <PropertyRef Name="STATE_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="PROPERTY_TYPE">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="PROPERTies" Relationship="RealEstateModel.FK__PROPERTY__PROPER__75A278F5" FromRole="PROPERTY_TYPE" ToRole="PROPERTY" />
         </EntityType>
         <EntityType Name="CONTACT">
           <Key>
@@ -167,6 +365,23 @@
           <Property Name="PHONE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="MESSAGE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DATE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="COUNTRY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PROPERTies" Relationship="RealEstateModel.FK__PROPERTY__COUNTR__778AC167" FromRole="COUNTRY" ToRole="PROPERTY" />
+          <NavigationProperty Name="STATEs" Relationship="RealEstateModel.FK__STATE__COUNTRY_I__3D5E1FD2" FromRole="COUNTRY" ToRole="STATE" />
+        </EntityType>
+        <EntityType Name="FAQ">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QUEST" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ANSWER" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PROPERTY">
           <Key>
@@ -214,6 +429,25 @@
           <Property Name="STATUS" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PROPERTies" Relationship="RealEstateModel.FK__PROPERTY__STATUS__76969D2E" FromRole="PROPERTY_STATUS" ToRole="PROPERTY" />
         </EntityType>
+        <EntityType Name="PROPERTY_TYPE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PROPERTies" Relationship="RealEstateModel.FK__PROPERTY__PROPER__75A278F5" FromRole="PROPERTY_TYPE" ToRole="PROPERTY" />
+        </EntityType>
+        <EntityType Name="STATE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="COUNTRY_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CITies" Relationship="RealEstateModel.FK__CITY__STATE_ID__5CD6CB2B" FromRole="STATE" ToRole="CITY" />
+          <NavigationProperty Name="COUNTRY" Relationship="RealEstateModel.FK__STATE__COUNTRY_I__3D5E1FD2" FromRole="STATE" ToRole="COUNTRY" />
+          <NavigationProperty Name="PROPERTies" Relationship="RealEstateModel.FK__PROPERTY__STATE___787EE5A0" FromRole="STATE" ToRole="PROPERTY" />
+        </EntityType>
         <EntityType Name="USER_ROLE">
           <Key>
             <PropertyRef Name="ID" />
@@ -222,6 +456,35 @@
           <Property Name="NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="USERS" Relationship="RealEstateModel.FK__USERS__ROLE_ID__02084FDA" FromRole="USER_ROLE" ToRole="USER" />
         </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PASSWORD" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FULLNAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MOBILE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ROLE_ID" Type="Int32" />
+          <Property Name="ABOUT_ME" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="REGISTRATION_DATE" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PROPERTies" Relationship="RealEstateModel.FK__PROPERTY__ADDED___7E37BEF6" FromRole="USER" ToRole="PROPERTY" />
+          <NavigationProperty Name="USER_ROLE" Relationship="RealEstateModel.FK__USERS__ROLE_ID__02084FDA" FromRole="USER" ToRole="USER_ROLE" />
+        </EntityType>
+        <Association Name="FK__CITY__STATE_ID__5CD6CB2B">
+          <End Type="RealEstateModel.STATE" Role="STATE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="RealEstateModel.CITY" Role="CITY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CITY">
+              <PropertyRef Name="STATE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__PROPERTY__CITY_I__797309D9">
           <End Type="RealEstateModel.CITY" Role="CITY" Multiplicity="0..1" />
           <End Type="RealEstateModel.PROPERTY" Role="PROPERTY" Multiplicity="*" />
@@ -242,6 +505,20 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="PROPERTY">
+              <PropertyRef Name="COUNTRY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__STATE__COUNTRY_I__3D5E1FD2">
+          <End Type="RealEstateModel.COUNTRY" Role="COUNTRY" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="RealEstateModel.STATE" Role="STATE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COUNTRY">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="STATE">
               <PropertyRef Name="COUNTRY_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -306,13 +583,141 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="RealEstateModelStoreContainer" CdmEntityContainer="RealEstateEntities">
-          </EntityContainerMapping>
+          <EntitySetMapping Name="ADMINs">
+            <EntityTypeMapping TypeName="RealEstateModel.ADMIN">
+              <MappingFragment StoreEntitySet="ADMIN">
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CITies">
+            <EntityTypeMapping TypeName="RealEstateModel.CITY">
+              <MappingFragment StoreEntitySet="CITY">
+                <ScalarProperty Name="STATE_ID" ColumnName="STATE_ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONTACTs">
+            <EntityTypeMapping TypeName="RealEstateModel.CONTACT">
+              <MappingFragment StoreEntitySet="CONTACT">
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+                <ScalarProperty Name="MESSAGE" ColumnName="MESSAGE" />
+                <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+                <ScalarProperty Name="SUBJECT" ColumnName="SUBJECT" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COUNTRies">
+            <EntityTypeMapping TypeName="RealEstateModel.COUNTRY">
+              <MappingFragment StoreEntitySet="COUNTRY">
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FAQS">
+            <EntityTypeMapping TypeName="RealEstateModel.FAQ">
+              <MappingFragment StoreEntitySet="FAQS">
+                <ScalarProperty Name="ANSWER" ColumnName="ANSWER" />
+                <ScalarProperty Name="QUEST" ColumnName="QUEST" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROPERTies">
+            <EntityTypeMapping TypeName="RealEstateModel.PROPERTY">
+              <MappingFragment StoreEntitySet="PROPERTY">
+                <ScalarProperty Name="ADDED_DATE" ColumnName="ADDED_DATE" />
+                <ScalarProperty Name="ADDED_BY_ID" ColumnName="ADDED_BY_ID" />
+                <ScalarProperty Name="NEIGHBORHOOD" ColumnName="NEIGHBORHOOD" />
+                <ScalarProperty Name="POSTAL_CODE" ColumnName="POSTAL_CODE" />
+                <ScalarProperty Name="CITY_ID" ColumnName="CITY_ID" />
+                <ScalarProperty Name="STATE_ID" ColumnName="STATE_ID" />
+                <ScalarProperty Name="COUNTRY_ID" ColumnName="COUNTRY_ID" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="IMG_4" ColumnName="IMG_4" />
+                <ScalarProperty Name="IMG_3" ColumnName="IMG_3" />
+                <ScalarProperty Name="IMG_2" ColumnName="IMG_2" />
+                <ScalarProperty Name="IMG_1" ColumnName="IMG_1" />
+                <ScalarProperty Name="FEATURES" ColumnName="FEATURES" />
+                <ScalarProperty Name="AFTER_PRICE_LABEL" ColumnName="AFTER_PRICE_LABEL" />
+                <ScalarProperty Name="BEFORE_PRICE_LABEL" ColumnName="BEFORE_PRICE_LABEL" />
+                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
+                <ScalarProperty Name="AREA" ColumnName="AREA" />
+                <ScalarProperty Name="GARAGES" ColumnName="GARAGES" />
+                <ScalarProperty Name="FLOORS" ColumnName="FLOORS" />
+                <ScalarProperty Name="BATHROOMS" ColumnName="BATHROOMS" />
+                <ScalarProperty Name="BEDROOMS" ColumnName="BEDROOMS" />
+                <ScalarProperty Name="LOCATION" ColumnName="LOCATION" />
+                <ScalarProperty Name="STATUS_ID" ColumnName="STATUS_ID" />
+                <ScalarProperty Name="PROPERTY_TYPE_ID" ColumnName="PROPERTY_TYPE_ID" />
+                <ScalarProperty Name="DESCR" ColumnName="DESCR" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROPERTY_STATUS">
+            <EntityTypeMapping TypeName="RealEstateModel.PROPERTY_STATUS">
+              <MappingFragment StoreEntitySet="PROPERTY_STATUS">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROPERTY_TYPE">
+            <EntityTypeMapping TypeName="RealEstateModel.PROPERTY_TYPE">
+              <MappingFragment StoreEntitySet="PROPERTY_TYPE">
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STATEs">
+            <EntityTypeMapping TypeName="RealEstateModel.STATE">
+              <MappingFragment StoreEntitySet="STATE">
+                <ScalarProperty Name="COUNTRY_ID" ColumnName="COUNTRY_ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER_ROLE">
+            <EntityTypeMapping TypeName="RealEstateModel.USER_ROLE">
+              <MappingFragment StoreEntitySet="USER_ROLE">
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERS">
+            <EntityTypeMapping TypeName="RealEstateModel.USER">
+              <MappingFragment StoreEntitySet="USERS">
+                <ScalarProperty Name="REGISTRATION_DATE" ColumnName="REGISTRATION_DATE" />
+                <ScalarProperty Name="ABOUT_ME" ColumnName="ABOUT_ME" />
+                <ScalarProperty Name="ROLE_ID" ColumnName="ROLE_ID" />
+                <ScalarProperty Name="MOBILE" ColumnName="MOBILE" />
+                <ScalarProperty Name="FULLNAME" ColumnName="FULLNAME" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

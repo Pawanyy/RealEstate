@@ -51,9 +51,13 @@ namespace RealEstateMVC_NOAUTH.Models
         [Display(Name = "About Me")]
         [StringLength(1000, MinimumLength = 2)]
         public string ABOUT_ME { get; set; }
-    
-        public Nullable<System.DateTime> REGISTRATION_DATE { get; set; }
 
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Registration Date")]
+        public Nullable<System.DateTime> REGISTRATION_DATE { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PROPERTY> PROPERTies { get; set; }
+        public virtual USER_ROLE USER_ROLE { get; set; }
     }
 }
