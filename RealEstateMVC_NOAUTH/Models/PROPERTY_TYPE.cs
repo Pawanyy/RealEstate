@@ -22,7 +22,6 @@ namespace RealEstateMVC_NOAUTH.Models
         }
     
         public int ID { get; set; }
-        public string NAME { get; set; }
     
         [Required]
         [DataType(DataType.Text)]

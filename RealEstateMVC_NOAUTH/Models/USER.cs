@@ -51,7 +51,6 @@ namespace RealEstateMVC_NOAUTH.Models
         [Display(Name = "About Me")]
         [StringLength(1000, MinimumLength = 2)]
         public string ABOUT_ME { get; set; }
-        public Nullable<System.DateTime> REGISTRATION_DATE { get; set; }
         public Nullable<int> ROLE_ID { get; set; }
     
         [DataType(DataType.DateTime)]
