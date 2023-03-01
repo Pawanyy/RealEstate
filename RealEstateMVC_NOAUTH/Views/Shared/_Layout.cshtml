@@ -22,8 +22,13 @@
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Properties", "Properties", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
+                <form class="d-flex" role="search">
+                    @Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Sign Up", "Login", "Home", new { area = "" }, new { @class = "btn btn-info ms-2" })
+                </form>
             </div>
         </div>
     </nav>

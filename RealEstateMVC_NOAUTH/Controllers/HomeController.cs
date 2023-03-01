@@ -47,5 +47,10 @@ namespace RealEstateMVC_NOAUTH.Controllers
 
             return View(cONTACT);
         }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
     }
 }
