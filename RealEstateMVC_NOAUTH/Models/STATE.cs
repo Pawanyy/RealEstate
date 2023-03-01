@@ -12,13 +12,14 @@ namespace RealEstateMVC_NOAUTH.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
+    
     public partial class STATE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public STATE()
         {
             this.CITies = new HashSet<CITY>();
+            this.PROPERTies = new HashSet<PROPERTY>();
         }
     
         public int ID { get; set; }
@@ -33,5 +34,7 @@ namespace RealEstateMVC_NOAUTH.Models
         public virtual COUNTRY COUNTRY { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CITY> CITies { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PROPERTY> PROPERTies { get; set; }
     }
 }

@@ -12,13 +12,12 @@ namespace RealEstateMVC_NOAUTH.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
-    public partial class COUNTRY
+
+    public partial class PROPERTY_STATUS
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public COUNTRY()
+        public PROPERTY_STATUS()
         {
-            this.STATEs = new HashSet<STATE>();
             this.PROPERTies = new HashSet<PROPERTY>();
         }
     
@@ -26,12 +25,10 @@ namespace RealEstateMVC_NOAUTH.Models
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Country")]
+        [Display(Name = "Property Status")]
         [StringLength(255, MinimumLength = 2)]
-        public string NAME { get; set; }
+        public string STATUS { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<STATE> STATEs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PROPERTY> PROPERTies { get; set; }
     }

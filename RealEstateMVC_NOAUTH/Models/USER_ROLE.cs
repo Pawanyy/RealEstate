@@ -12,27 +12,24 @@ namespace RealEstateMVC_NOAUTH.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
-    public partial class COUNTRY
+
+    public partial class USER_ROLE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public COUNTRY()
+        public USER_ROLE()
         {
-            this.STATEs = new HashSet<STATE>();
-            this.PROPERTies = new HashSet<PROPERTY>();
+            this.USERS = new HashSet<USER>();
         }
     
         public int ID { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Country")]
+        [Display(Name = "User Role")]
         [StringLength(255, MinimumLength = 2)]
         public string NAME { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<STATE> STATEs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PROPERTY> PROPERTies { get; set; }
+        public virtual ICollection<USER> USERS { get; set; }
     }
 }

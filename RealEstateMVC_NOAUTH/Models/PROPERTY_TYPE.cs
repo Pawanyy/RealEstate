@@ -12,11 +12,18 @@ namespace RealEstateMVC_NOAUTH.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
+    
     public partial class PROPERTY_TYPE
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PROPERTY_TYPE()
+        {
+            this.PROPERTies = new HashSet<PROPERTY>();
+        }
+    
         public int ID { get; set; }
-
+        public string NAME { get; set; }
+    
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Property Type")]

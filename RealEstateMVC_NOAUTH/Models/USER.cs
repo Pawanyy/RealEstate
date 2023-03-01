@@ -13,11 +13,15 @@ namespace RealEstateMVC_NOAUTH.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Runtime.InteropServices;
-
+    
     public partial class USER
     {
-        public int ID { get; set; }
-
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public USER()
+        {
+            this.PROPERTies = new HashSet<PROPERTY>();
+        }
+    
         [Required]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
@@ -47,7 +51,9 @@ namespace RealEstateMVC_NOAUTH.Models
         [Display(Name = "About Me")]
         [StringLength(1000, MinimumLength = 2)]
         public string ABOUT_ME { get; set; }
-
+        public Nullable<System.DateTime> REGISTRATION_DATE { get; set; }
+        public Nullable<int> ROLE_ID { get; set; }
+    
         [DataType(DataType.DateTime)]
         [Display(Name = "Registration Date")]
         public Nullable<System.DateTime> REGISTRATION_DATE { get; set; }

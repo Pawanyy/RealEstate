@@ -33,5 +33,8 @@ namespace RealEstateMVC_NOAUTH.Models
         public virtual DbSet<CITY> CITies { get; set; }
         public virtual DbSet<PROPERTY_TYPE> PROPERTY_TYPE { get; set; }
         public virtual DbSet<CONTACT> CONTACTs { get; set; }
+        public virtual DbSet<PROPERTY> PROPERTies { get; set; }
+        public virtual DbSet<PROPERTY_STATUS> PROPERTY_STATUS { get; set; }
+        public virtual DbSet<USER_ROLE> USER_ROLE { get; set; }
     }
 }

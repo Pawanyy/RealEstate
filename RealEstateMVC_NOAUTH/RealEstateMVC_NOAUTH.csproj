@@ -137,6 +137,7 @@
     <Compile Include="Controllers\Admin\StatesController.cs" />
     <Compile Include="Controllers\Admin\UsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\User\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -153,6 +154,12 @@
       <DependentUpon>RealEstate.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FAQ.cs">
+      <DependentUpon>RealEstate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PROPERTY.cs">
+      <DependentUpon>RealEstate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PROPERTY_STATUS.cs">
       <DependentUpon>RealEstate.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PROPERTY_TYPE.cs">
@@ -177,6 +184,9 @@
       <DependentUpon>RealEstate.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\USER.cs">
+      <DependentUpon>RealEstate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USER_ROLE.cs">
       <DependentUpon>RealEstate.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -457,9 +467,11 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Admin\Profile.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Shared\_UserLayout.cshtml" />
+    <Content Include="Views\Shared\_VendorLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\User\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

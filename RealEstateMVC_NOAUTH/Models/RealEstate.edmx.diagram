@@ -15,6 +15,16 @@
         <AssociationConnector Association="RealEstateModel.FK__CITY__STATE_ID__5CD6CB2B" />
         <EntityTypeShape EntityType="RealEstateModel.PROPERTY_TYPE" Width="1.5" PointX="0.75" PointY="6.75" />
         <EntityTypeShape EntityType="RealEstateModel.CONTACT" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="RealEstateModel.PROPERTY" Width="1.5" PointX="7.5" PointY="3.875" />
+        <EntityTypeShape EntityType="RealEstateModel.PROPERTY_STATUS" Width="1.5" PointX="5.25" PointY="7.875" />
+        <EntityTypeShape EntityType="RealEstateModel.USER_ROLE" Width="1.5" PointX="2.5" PointY="9.375" />
+        <AssociationConnector Association="RealEstateModel.FK__PROPERTY__CITY_I__797309D9" />
+        <AssociationConnector Association="RealEstateModel.FK__PROPERTY__COUNTR__778AC167" />
+        <AssociationConnector Association="RealEstateModel.FK__PROPERTY__ADDED___7E37BEF6" />
+        <AssociationConnector Association="RealEstateModel.FK__PROPERTY__PROPER__75A278F5" />
+        <AssociationConnector Association="RealEstateModel.FK__PROPERTY__STATE___787EE5A0" />
+        <AssociationConnector Association="RealEstateModel.FK__PROPERTY__STATUS__76969D2E" />
+        <AssociationConnector Association="RealEstateModel.FK__USERS__ROLE_ID__02084FDA" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
