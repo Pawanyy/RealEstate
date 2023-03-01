@@ -12,22 +12,12 @@ namespace RealEstateMVC_NOAUTH.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Xml.Linq;
 
+    [MetadataType(typeof(FaqMetaData))]
     public partial class FAQ
     {
         public int ID { get; set; }
-
-        [Required]
-        [DataType(DataType.Text)]
-        [Display(Name = "Question")]
-        [StringLength(255, MinimumLength = 2)]
         public string QUEST { get; set; }
-
-        [Required]
-        [DataType(DataType.Text)]
-        [StringLength(255, MinimumLength = 2)]
-        [Display(Name = "Answer")]
         public string ANSWER { get; set; }
     }
 }

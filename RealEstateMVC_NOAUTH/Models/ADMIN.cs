@@ -13,18 +13,11 @@ namespace RealEstateMVC_NOAUTH.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    [MetadataType(typeof(AdminMetaData))]
     public partial class ADMIN
     {
         public int ID { get; set; }
-
-        [Display(Name = "Username")]
-        [DataType(DataType.Text)]
-        [StringLength(255, MinimumLength = 2)]
         public string USERNAME { get; set; }
-
-        [Display(Name ="Password")]
-        [DataType(DataType.Password)]
-        [StringLength(255, MinimumLength = 2)]
         public string PASSWORD { get; set; }
     }
 }
