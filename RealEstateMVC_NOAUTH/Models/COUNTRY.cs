@@ -12,7 +12,8 @@ namespace RealEstateMVC_NOAUTH.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+
+    [MetadataType(typeof(CountryMetaData))]
     public partial class COUNTRY
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,11 +24,6 @@ namespace RealEstateMVC_NOAUTH.Models
         }
     
         public int ID { get; set; }
-
-        [Required]
-        [DataType(DataType.Text)]
-        [Display(Name = "Country")]
-        [StringLength(255, MinimumLength = 2)]
         public string NAME { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
