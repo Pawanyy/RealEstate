@@ -146,6 +146,9 @@
     <Compile Include="Models\CITY.cs">
       <DependentUpon>RealEstate.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CONTACT.cs">
+      <DependentUpon>RealEstate.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\COUNTRY.cs">
       <DependentUpon>RealEstate.tt</DependentUpon>
     </Compile>

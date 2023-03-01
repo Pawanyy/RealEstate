@@ -27,5 +27,25 @@ namespace RealEstateMVC_NOAUTH.Controllers
 
             return View();
         }
+
+        [HttpPost]
+
+        [ValidateAntiForgeryToken]
+        public ActionResult Contact([Bind(Include = "NAME,EMAIL,SUBJECT,PHONE,MESSAGE")] CONTACT cONTACT)
+        {
+            if (ModelState.IsValid)
+            {
+                cONTACT.DATE = DateTime.Now;
+                db.CONTACTs.Add(cONTACT);
+                db.SaveChanges();
+                ViewBag.msg = @"<div class=""alert alert-success alert-dismissible fade show"" role=""alert"">
+                                      <strong>Success! </strong>Message Sent Successfully
+                                      <button type=""button"" class=""btn-close"" data-bs-dismiss=""alert"" aria-label=""Close""></button>
+                                    </div>";
+                return View("Contact");
+            }
+
+            return View(cONTACT);
+        }
     }
 }
