@@ -19,6 +19,7 @@ namespace RealEstateMVC_NOAUTH.Models
         public COUNTRY()
         {
             this.PROPERTies = new HashSet<PROPERTY>();
+            this.STATEs = new HashSet<STATE>();
         }
     
         public int ID { get; set; }
@@ -29,6 +30,8 @@ namespace RealEstateMVC_NOAUTH.Models
         [StringLength(255, MinimumLength = 2)]
         public string NAME { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PROPERTY> PROPERTies { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<STATE> STATEs { get; set; }
     }
