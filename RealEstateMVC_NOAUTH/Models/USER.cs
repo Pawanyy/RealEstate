@@ -12,8 +12,8 @@ namespace RealEstateMVC_NOAUTH.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Runtime.InteropServices;
-    
+
+    [MetadataType(typeof(UserMetaData))]
     public partial class USER
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,38 +22,13 @@ namespace RealEstateMVC_NOAUTH.Models
             this.PROPERTies = new HashSet<PROPERTY>();
         }
     
-        [Required]
-        [DataType(DataType.EmailAddress)]
-        [Display(Name = "Email")]
-        [StringLength(255, MinimumLength = 2)]
+        public int ID { get; set; }
         public string EMAIL { get; set; }
-
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        [StringLength(255, MinimumLength = 2)]
         public string PASSWORD { get; set; }
-
-        [Required]
-        [DataType(DataType.Text)]
-        [Display(Name = "Full Name")]
-        [StringLength(255, MinimumLength = 2)]
         public string FULLNAME { get; set; }
-
-        [Required]
-        [DataType(DataType.PhoneNumber)]
-        [Display(Name = "Mobile")]
-        [StringLength(10, MinimumLength = 10)]
         public string MOBILE { get; set; }
-
-        [Required]
-        [DataType(DataType.MultilineText)]
-        [Display(Name = "About Me")]
-        [StringLength(1000, MinimumLength = 2)]
+        public Nullable<int> ROLE_ID { get; set; }
         public string ABOUT_ME { get; set; }
-
-        [DataType(DataType.DateTime)]
-        [Display(Name = "Registration Date")]
         public Nullable<System.DateTime> REGISTRATION_DATE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
