@@ -261,6 +261,8 @@
     <Content Include="assets\admin\vendor\remixicon\remixicon.symbol.svg" />
     <Content Include="assets\admin\vendor\simple-datatables\simple-datatables.js" />
     <Content Include="assets\admin\vendor\simple-datatables\style.css" />
+    <Content Include="assets\img\RealEstateLogo.png" />
+    <Content Include="assets\img\RealEstate.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -454,7 +456,9 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Admin\Profile.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controllers\User\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
     <Content Include="Content\bootstrap.rtl.css.map" />
