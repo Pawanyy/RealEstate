@@ -38,18 +38,19 @@ namespace RealEstateMVC_NOAUTH.Controllers.User
         }
 
         [HttpPost]
-        public ActionResult Login([Bind(Include = "EMAIL,PASSWORD")] USER uSER) {
-            ViewBag.msg = ModelState.IsValid.ToString();
+        public ActionResult Login([Bind(Include = "EMAIL,PASSWORD")] USER uSER)
+        {
             if (ModelState.IsValid)
             {
-                var usr = db.USERS.Where(m => m.EMAIL.Equals(uSER.EMAIL) && m.PASSWORD.Equals(uSER.PASSWORD)).SingleOrDefault();
+                uSER.ROLE_ID = db.USER_ROLE.Where(m => m.NAME.Equals("User")).Single().ID;
+                var usr = db.USERS.Where(m => m.EMAIL.Equals(uSER.EMAIL) && m.PASSWORD.Equals(uSER.PASSWORD) && m.ROLE_ID == uSER.ROLE_ID).SingleOrDefault();
 
                 if (usr != null)
                 {
                     Session["userId"] = usr.ID.ToString();
                     Session["Email"] = usr.EMAIL.ToString();
                     Session["Name"] = usr.FULLNAME.ToString();
-                    Session["Type"] = usr.USER_ROLE.ToString();
+                    Session["Type"] = db.USER_ROLE.Where(m => m.NAME.Equals("User")).Single().NAME.ToString();
 
                     return RedirectToAction("Dashboard");
 
@@ -66,7 +67,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.User
             return View();
         }
 
-        public ActionResult Register() 
+        public ActionResult Register()
         {
             return View();
         }
@@ -93,10 +94,10 @@ namespace RealEstateMVC_NOAUTH.Controllers.User
 
         public ActionResult Dashboard()
         {
-            if (!IsLogin())
-            {
-                return RedirectToAction("Login");
-            }
+            //if (!IsLogin())
+            //{
+            //    return RedirectToAction("Login");
+            //}
 
             return View();
         }
