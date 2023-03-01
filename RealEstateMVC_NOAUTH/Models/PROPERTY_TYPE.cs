@@ -28,5 +28,7 @@ namespace RealEstateMVC_NOAUTH.Models
         [Display(Name = "Property Type")]
         [StringLength(255, MinimumLength = 2)]
         public string NAME { get; set; }
+
+        public virtual ICollection<PROPERTY> PROPERTies { get; set; }
     }
 }

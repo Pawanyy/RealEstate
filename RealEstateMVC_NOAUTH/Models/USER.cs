@@ -56,5 +56,7 @@ namespace RealEstateMVC_NOAUTH.Models
         [DataType(DataType.DateTime)]
         [Display(Name = "Registration Date")]
         public Nullable<System.DateTime> REGISTRATION_DATE { get; set; }
+
+        public virtual ICollection<PROPERTY> PROPERTies { get; set; }
     }
 }
