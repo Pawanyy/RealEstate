@@ -144,9 +144,16 @@
     <Compile Include="Models\ADMIN.cs">
       <DependentUpon>RealEstate.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminMetaData.cs" />
     <Compile Include="Models\CITY.cs">
       <DependentUpon>RealEstate.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ContactMetaData.cs" />
+    <Compile Include="Models\CountryMetaData.cs" />
+    <Compile Include="Models\PropertyStatusMetaData.cs" />
+    <Compile Include="Models\PropertyTypeMetaData.cs" />
+    <Compile Include="Models\StateMetaData.cs" />
+    <Compile Include="Models\CityMetaData.cs" />
     <Compile Include="Models\CONTACT.cs">
       <DependentUpon>RealEstate.tt</DependentUpon>
     </Compile>
@@ -186,6 +193,9 @@
     <Compile Include="Models\USER.cs">
       <DependentUpon>RealEstate.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FaqMetaData.cs" />
+    <Compile Include="Models\UserMetaData.cs" />
+    <Compile Include="Models\UserRoleMetaData.cs" />
     <Compile Include="Models\USER_ROLE.cs">
       <DependentUpon>RealEstate.tt</DependentUpon>
     </Compile>
