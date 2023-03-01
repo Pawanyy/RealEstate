@@ -13,6 +13,7 @@ namespace RealEstateMVC_NOAUTH.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    [MetadataType(typeof(UserRoleMetaData))]
     public partial class USER_ROLE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,11 +23,6 @@ namespace RealEstateMVC_NOAUTH.Models
         }
     
         public int ID { get; set; }
-
-        [Required]
-        [DataType(DataType.Text)]
-        [Display(Name = "User Role")]
-        [StringLength(255, MinimumLength = 2)]
         public string NAME { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
