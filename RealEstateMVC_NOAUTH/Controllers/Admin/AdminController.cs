@@ -15,8 +15,18 @@ namespace RealEstateMVC_NOAUTH.Controllers
 
         private RealEstateEntities db = new RealEstateEntities();
 
+        private bool IsLogin()
+        {
+            return (Session.Count > 0 && Session["Type"].Equals("Admin"));
+        }
+
         public ActionResult Index()
         {
+            if (IsLogin())
+            {
+                return RedirectToAction("Dashboard");
+            }
+
             return View();
         }
 
@@ -49,7 +59,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
 
         public ActionResult Dashboard()
         {
-            if (Session.Count <= 0 || !Session["Type"].Equals("Admin"))
+            if (!IsLogin())
             {
                 return RedirectToAction("Index");
             }
@@ -59,7 +69,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
 
         public ActionResult Profile()
         {
-            if (Session.Count <= 0 || !Session["Type"].Equals("Admin"))
+            if (!IsLogin())
             {
                 return RedirectToAction("Index");
             }
@@ -93,14 +103,6 @@ namespace RealEstateMVC_NOAUTH.Controllers
             Session.RemoveAll();
             return RedirectToAction("Index");
         }
-
-        public ActionResult Faqs()
-        {
-            return View();
-        }
-
-
-
 
     }
 }
