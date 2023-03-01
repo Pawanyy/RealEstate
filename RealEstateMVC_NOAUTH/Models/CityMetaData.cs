@@ -15,5 +15,8 @@ namespace RealEstateMVC_NOAUTH.Models
         [Display(Name = "City")]
         [StringLength(255, MinimumLength = 2)]
         public string NAME;
+
+        [Display(Name = "State")]
+        public int STATE_ID;
     }
 }

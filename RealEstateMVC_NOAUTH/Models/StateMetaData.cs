@@ -15,5 +15,8 @@ namespace RealEstateMVC_NOAUTH.Models
         [Display(Name = "State")]
         [StringLength(255, MinimumLength = 2)]
         public string NAME;
+
+        [Display(Name = "Country")]
+        public int COUNTRY_ID;
     }
 }
