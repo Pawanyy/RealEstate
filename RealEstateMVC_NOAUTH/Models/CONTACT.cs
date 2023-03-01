@@ -13,37 +13,14 @@ namespace RealEstateMVC_NOAUTH.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    [MetadataType(typeof(ContactMetaData))]
     public partial class CONTACT
     {
         public int ID { get; set; }
-        [Required]
-        [Display(Name = "Name")]
-        [DataType(DataType.Text)]
-        [StringLength(100, MinimumLength = 2)]
         public string NAME { get; set; }
-
-        [Required]
-        [Display(Name = "Email")]
-        [DataType(DataType.EmailAddress)]
-        [StringLength(255, MinimumLength = 2)]
         public string EMAIL { get; set; }
-
-        [Required]
-        [Display(Name = "Subject")]
-        [DataType(DataType.Text)]
-        [StringLength(255, MinimumLength = 2)]
         public string SUBJECT { get; set; }
-
-        [Required]
-        [Display(Name = "Phone")]
-        [DataType(DataType.PhoneNumber)]
-        [StringLength(10, MinimumLength = 10)]
         public string PHONE { get; set; }
-
-        [Required]
-        [Display(Name = "Message")]
-        [DataType(DataType.MultilineText)]
-        [StringLength(1000, MinimumLength = 2)]
         public string MESSAGE { get; set; }
         public Nullable<System.DateTime> DATE { get; set; }
     }
