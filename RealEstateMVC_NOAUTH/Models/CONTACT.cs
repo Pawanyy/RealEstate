@@ -12,44 +12,39 @@ namespace RealEstateMVC_NOAUTH.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Runtime.InteropServices;
 
-    public partial class USER
+    public partial class CONTACT
     {
         public int ID { get; set; }
+        [Required]
+        [Display(Name = "Name")]
+        [DataType(DataType.Text)]
+        [StringLength(100, MinimumLength = 2)]
+        public string NAME { get; set; }
 
         [Required]
-        [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
+        [DataType(DataType.EmailAddress)]
         [StringLength(255, MinimumLength = 2)]
         public string EMAIL { get; set; }
 
         [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        [StringLength(255, MinimumLength = 2)]
-        public string PASSWORD { get; set; }
-
-        [Required]
+        [Display(Name = "Subject")]
         [DataType(DataType.Text)]
-        [Display(Name = "Full Name")]
         [StringLength(255, MinimumLength = 2)]
-        public string FULLNAME { get; set; }
+        public string SUBJECT { get; set; }
 
         [Required]
+        [Display(Name = "Phone")]
         [DataType(DataType.PhoneNumber)]
-        [Display(Name = "Mobile")]
         [StringLength(10, MinimumLength = 10)]
-        public string MOBILE { get; set; }
+        public string PHONE { get; set; }
 
         [Required]
+        [Display(Name = "Message")]
         [DataType(DataType.MultilineText)]
-        [Display(Name = "About Me")]
         [StringLength(1000, MinimumLength = 2)]
-        public string ABOUT_ME { get; set; }
-
-        [DataType(DataType.DateTime)]
-        [Display(Name = "Registration Date")]
-        public Nullable<System.DateTime> REGISTRATION_DATE { get; set; }
+        public string MESSAGE { get; set; }
+        public Nullable<System.DateTime> DATE { get; set; }
     }
 }

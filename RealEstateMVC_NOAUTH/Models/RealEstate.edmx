@@ -21,6 +21,18 @@
           <Property Name="NAME" Type="varchar" MaxLength="255" />
           <Property Name="STATE_ID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="CONTACT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="varchar" MaxLength="255" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="255" />
+          <Property Name="SUBJECT" Type="varchar" MaxLength="255" />
+          <Property Name="PHONE" Type="nchar" MaxLength="10" />
+          <Property Name="MESSAGE" Type="text" />
+          <Property Name="DATE" Type="datetime" />
+        </EntityType>
         <EntityType Name="COUNTRY">
           <Key>
             <PropertyRef Name="ID" />
@@ -94,6 +106,7 @@
         <EntityContainer Name="RealEstateModelStoreContainer">
           <EntitySet Name="ADMIN" EntityType="Self.ADMIN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CITY" EntityType="Self.CITY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CONTACT" EntityType="Self.CONTACT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="COUNTRY" EntityType="Self.COUNTRY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FAQS" EntityType="Self.FAQS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PROPERTY_TYPE" EntityType="Self.PROPERTY_TYPE" Schema="dbo" store:Type="Tables" />
@@ -188,6 +201,7 @@
             <End Role="CITY" EntitySet="CITies" />
           </AssociationSet>
           <EntitySet Name="PROPERTY_TYPE" EntityType="RealEstateModel.PROPERTY_TYPE" />
+          <EntitySet Name="CONTACTs" EntityType="RealEstateModel.CONTACT" />
         </EntityContainer>
         <EntityType Name="CITY">
           <Key>
@@ -218,6 +232,18 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CONTACT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SUBJECT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PHONE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="MESSAGE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DATE" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -285,6 +311,19 @@
           <EntitySetMapping Name="PROPERTY_TYPE">
             <EntityTypeMapping TypeName="RealEstateModel.PROPERTY_TYPE">
               <MappingFragment StoreEntitySet="PROPERTY_TYPE">
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONTACTs">
+            <EntityTypeMapping TypeName="RealEstateModel.CONTACT">
+              <MappingFragment StoreEntitySet="CONTACT">
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+                <ScalarProperty Name="MESSAGE" ColumnName="MESSAGE" />
+                <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+                <ScalarProperty Name="SUBJECT" ColumnName="SUBJECT" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

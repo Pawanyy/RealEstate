@@ -21,10 +21,12 @@ namespace RealEstateMVC_NOAUTH.Models
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Question")]
+        [StringLength(255, MinimumLength = 2)]
         public string QUEST { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
+        [StringLength(255, MinimumLength = 2)]
         [Display(Name = "Answer")]
         public string ANSWER { get; set; }
     }

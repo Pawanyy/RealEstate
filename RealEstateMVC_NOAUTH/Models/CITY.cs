@@ -20,6 +20,7 @@ namespace RealEstateMVC_NOAUTH.Models
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "City")]
+        [StringLength(255, MinimumLength = 2)]
         public string NAME { get; set; }
         public int STATE_ID { get; set; }
     

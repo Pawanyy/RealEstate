@@ -20,6 +20,7 @@ namespace RealEstateMVC_NOAUTH.Models
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Property Type")]
+        [StringLength(255, MinimumLength = 2)]
         public string NAME { get; set; }
     }
 }

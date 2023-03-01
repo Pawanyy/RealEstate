@@ -14,6 +14,7 @@
         <EntityTypeShape EntityType="RealEstateModel.CITY" Width="1.5" PointX="5.25" PointY="1" />
         <AssociationConnector Association="RealEstateModel.FK__CITY__STATE_ID__5CD6CB2B" />
         <EntityTypeShape EntityType="RealEstateModel.PROPERTY_TYPE" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="RealEstateModel.CONTACT" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
