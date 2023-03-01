@@ -22,19 +22,16 @@ namespace RealEstateMVC_NOAUTH.Models
         [StringLength(255, MinimumLength = 2)]
         public string PASSWORD;
 
-        [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Full Name")]
         [StringLength(255, MinimumLength = 2)]
         public string FULLNAME;
 
-        [Required]
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "Mobile")]
         [StringLength(10, MinimumLength = 10)]
         public string MOBILE;
 
-        [Required]
         [DataType(DataType.MultilineText)]
         [Display(Name = "About Me")]
         [StringLength(1000, MinimumLength = 2)]
