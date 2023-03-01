@@ -30,6 +30,9 @@
         <th>
             @Html.DisplayNameFor(model => model.REGISTRATION_DATE)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.USER_ROLE.NAME)
+        </th>
         <th></th>
     </tr>
 
@@ -52,6 +55,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.REGISTRATION_DATE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.USER_ROLE.NAME)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

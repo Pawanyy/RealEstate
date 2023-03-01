@@ -17,7 +17,8 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: Users
         public ActionResult Index()
         {
-            return View(db.USERS.ToList());
+            var uSERS = db.USERS.Include(u => u.USER_ROLE);
+            return View(uSERS.ToList());
         }
 
         // GET: Users/Details/5
@@ -38,6 +39,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: Users/Create
         public ActionResult Create()
         {
+            ViewBag.ROLE_ID = new SelectList(db.USER_ROLE, "ID", "NAME");
             return View();
         }
 
@@ -46,7 +48,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,EMAIL,PASSWORD,FULLNAME,MOBILE,ABOUT_ME")] USER uSER)
+        public ActionResult Create([Bind(Include = "ID,EMAIL,PASSWORD,FULLNAME,MOBILE,ROLE_ID,ABOUT_ME")] USER uSER)
         {
             if (ModelState.IsValid)
             {
@@ -56,6 +58,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
                 return RedirectToAction("Index");
             }
 
+            ViewBag.ROLE_ID = new SelectList(db.USER_ROLE, "ID", "NAME", uSER.ROLE_ID);
             return View(uSER);
         }
 
@@ -71,6 +74,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
             {
                 return HttpNotFound();
             }
+            ViewBag.ROLE_ID = new SelectList(db.USER_ROLE, "ID", "NAME", uSER.ROLE_ID);
             return View(uSER);
         }
 
@@ -79,15 +83,15 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,EMAIL,PASSWORD,FULLNAME,MOBILE,ABOUT_ME")] USER uSER)
+        public ActionResult Edit([Bind(Include = "ID,EMAIL,PASSWORD,FULLNAME,MOBILE,ROLE_ID,ABOUT_ME,REGISTRATION_DATE")] USER uSER)
         {
             if (ModelState.IsValid)
             {
-                uSER.REGISTRATION_DATE = DateTime.Now;
                 db.Entry(uSER).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.ROLE_ID = new SelectList(db.USER_ROLE, "ID", "NAME", uSER.ROLE_ID);
             return View(uSER);
         }
 
