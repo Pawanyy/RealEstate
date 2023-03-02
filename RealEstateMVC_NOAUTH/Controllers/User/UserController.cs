@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -100,6 +101,24 @@ namespace RealEstateMVC_NOAUTH.Controllers.User
             //}
 
             return View();
+        }
+
+        public ActionResult Profile()
+        {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Login");
+            }
+
+            int id = int.Parse(Session["userId"].ToString());
+
+            USER uSER = db.USERS.Find(id);
+            if (uSER == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(uSER);
         }
 
         public ActionResult Logout()
