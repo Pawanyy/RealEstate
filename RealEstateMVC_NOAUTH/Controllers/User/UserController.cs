@@ -130,10 +130,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.User
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Profile([Bind(Include = "ID,EMAIL,PASSWORD,FULLNAME,MOBILE,ABOUT_ME")] USER uSER)
+        public ActionResult Profile([Bind(Include = "ID,EMAIL,PASSWORD,FULLNAME,MOBILE,ABOUT_ME,REGISTRATION_DATE")] USER uSER)
         {
             if (ModelState.IsValid)
             {
+                uSER.ROLE_ID = db.USER_ROLE.Where(m => m.NAME.Equals("User")).Single().ID;
                 db.Entry(uSER).State = EntityState.Modified;
                 db.SaveChanges();
             }
