@@ -11,7 +11,9 @@ namespace RealEstateMVC_NOAUTH.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(PropertyMetaData))]
     public partial class PROPERTY
     {
         public int ID { get; set; }
