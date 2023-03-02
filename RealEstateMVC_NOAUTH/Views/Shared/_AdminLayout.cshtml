@@ -34,7 +34,7 @@
         <div class="d-flex align-items-center justify-content-between">
             <a href="@Url.Action("Dashboard", "Admin")" class="logo d-flex align-items-center">
                 <img src="/assets/admin/img/logo.png" alt="">
-                <span class="d-none d-lg-block">NiceAdmin</span>
+                <span class="d-none d-lg-block">Admin</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
@@ -118,6 +118,13 @@
                 <a class="nav-link collapsed" href="@Url.Action("Index", "PropertyTypes")">
                     <i class="bi bi-houses"></i>
                     <span>Property Type</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="@Url.Action("Index", "PropertyStatus")">
+                    <i class="bi bi-buildings"></i>
+                    <span>Property Status</span>
                 </a>
             </li>
 
@@ -231,10 +238,10 @@
 
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+            &copy; Copyright @DateTime.Now <strong><span>Admin</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            Made with ❤️.
         </div>
     </footer><!-- End Footer -->
 

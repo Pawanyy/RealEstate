@@ -134,6 +134,7 @@
     <Compile Include="Controllers\Admin\ContactsController.cs" />
     <Compile Include="Controllers\Admin\CountriesController.cs" />
     <Compile Include="Controllers\Admin\FaqsController.cs" />
+    <Compile Include="Controllers\Admin\PropertyStatusController.cs" />
     <Compile Include="Controllers\Admin\PropertyTypesController.cs" />
     <Compile Include="Controllers\Admin\StatesController.cs" />
     <Compile Include="Controllers\Admin\UsersController.cs" />
@@ -492,6 +493,11 @@
     <Content Include="Views\Vendor\Register.cshtml" />
     <Content Include="Views\User\Profile.cshtml" />
     <Content Include="Views\Vendor\Profile.cshtml" />
+    <Content Include="Views\PropertyStatus\Create.cshtml" />
+    <Content Include="Views\PropertyStatus\Delete.cshtml" />
+    <Content Include="Views\PropertyStatus\Details.cshtml" />
+    <Content Include="Views\PropertyStatus\Edit.cshtml" />
+    <Content Include="Views\PropertyStatus\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
