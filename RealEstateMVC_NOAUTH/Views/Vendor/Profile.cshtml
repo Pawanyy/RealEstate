@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Profile";
-    Layout = "~/Views/Shared/_UserLayout.cshtml";
+    Layout = "~/Views/Shared/_VendorLayout.cshtml";
 }
 
 <h2>Profile</h2>
@@ -10,9 +10,9 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <hr/>
+        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
 

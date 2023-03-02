@@ -1,6 +1,7 @@
 ﻿using RealEstateMVC_NOAUTH.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -103,6 +104,12 @@ namespace RealEstateMVC_NOAUTH.Controllers.User
             return View();
         }
 
+        public ActionResult Logout()
+        {
+            Session.RemoveAll();
+            return RedirectToAction("Index");
+        }
+
         public ActionResult Profile()
         {
             if (!IsLogin())
@@ -121,10 +128,17 @@ namespace RealEstateMVC_NOAUTH.Controllers.User
             return View(uSER);
         }
 
-        public ActionResult Logout()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Profile([Bind(Include = "ID,EMAIL,PASSWORD,FULLNAME,MOBILE,ABOUT_ME")] USER uSER)
         {
-            Session.RemoveAll();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                db.Entry(uSER).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            return View(uSER);
         }
+
     }
 }

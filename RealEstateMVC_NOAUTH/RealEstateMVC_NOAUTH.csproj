@@ -491,6 +491,7 @@
     <Content Include="Views\Vendor\Login.cshtml" />
     <Content Include="Views\Vendor\Register.cshtml" />
     <Content Include="Views\User\Profile.cshtml" />
+    <Content Include="Views\Vendor\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
