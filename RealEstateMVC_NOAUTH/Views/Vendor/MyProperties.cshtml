@@ -1,0 +1,186 @@
+﻿@model IEnumerable<RealEstateMVC_NOAUTH.Models.PROPERTY>
+
+@{
+    ViewBag.Title = "My Properties";
+    Layout = "~/Views/Shared/_VendorLayout.cshtml";
+}
+
+<h2>My Properties</h2>
+
+<div class="table-responsive">
+
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DESCR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LOCATION)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BEDROOMS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BATHROOMS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FLOORS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GARAGES)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AREA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PRICE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BEFORE_PRICE_LABEL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AFTER_PRICE_LABEL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FEATURES)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IMG_1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IMG_2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IMG_3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IMG_4)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ADDRESS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.POSTAL_CODE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NEIGHBORHOOD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ADDED_DATE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CITY.NAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.COUNTRY.NAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.USER.EMAIL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PROPERTY_TYPE.NAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.STATE.NAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PROPERTY_STATUS.STATUS)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DESCR)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LOCATION)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BEDROOMS)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BATHROOMS)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FLOORS)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GARAGES)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AREA)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PRICE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BEFORE_PRICE_LABEL)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AFTER_PRICE_LABEL)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FEATURES)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IMG_1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IMG_2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IMG_3)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IMG_4)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ADDRESS)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.POSTAL_CODE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NEIGHBORHOOD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ADDED_DATE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CITY.NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.COUNTRY.NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.USER.EMAIL)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PROPERTY_TYPE.NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.STATE.NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PROPERTY_STATUS.STATUS)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditProperty", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "DetailsProperty", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "DeleteProperty", new { id = item.ID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

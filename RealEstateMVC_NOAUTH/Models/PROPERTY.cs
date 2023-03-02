@@ -12,6 +12,7 @@ namespace RealEstateMVC_NOAUTH.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Web;
 
     [MetadataType(typeof(PropertyMetaData))]
     public partial class PROPERTY
@@ -35,6 +36,12 @@ namespace RealEstateMVC_NOAUTH.Models
         public string IMG_2 { get; set; }
         public string IMG_3 { get; set; }
         public string IMG_4 { get; set; }
+
+        public HttpPostedFileBase IMAGE_1 { get; set; }
+        public HttpPostedFileBase IMAGE_2 { get; set; }
+        public HttpPostedFileBase IMAGE_3 { get; set; }
+        public HttpPostedFileBase IMAGE_4 { get; set; }
+
         public string ADDRESS { get; set; }
         public Nullable<int> COUNTRY_ID { get; set; }
         public Nullable<int> STATE_ID { get; set; }

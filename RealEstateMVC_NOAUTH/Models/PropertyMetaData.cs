@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -16,7 +17,7 @@ namespace RealEstateMVC_NOAUTH.Models
         [StringLength(255, MinimumLength = 2)]
         public string NAME;
 
-        [DataType(DataType.Text)]
+        [DataType(DataType.MultilineText)]
         [Display(Name = "Description")]
         [StringLength(1000, MinimumLength = 2)]
         public string DESCR;
@@ -67,7 +68,7 @@ namespace RealEstateMVC_NOAUTH.Models
         [StringLength(255, MinimumLength = 2)]
         public string AFTER_PRICE_LABEL;
 
-        [DataType(DataType.Text)]
+        [DataType(DataType.MultilineText)]
         [Display(Name = "Features")]
         [StringLength(1000, MinimumLength = 2)]
         public string FEATURES;
@@ -88,7 +89,19 @@ namespace RealEstateMVC_NOAUTH.Models
         [Display(Name = "Image 4")]
         public string IMG_4;
 
-        [DataType(DataType.Text)]
+        [NotMapped]
+        public HttpPostedFileBase IMAGE_1;
+
+        [NotMapped]
+        public HttpPostedFileBase IMAGE_2;
+
+        [NotMapped]
+        public HttpPostedFileBase IMAGE_3;
+
+        [NotMapped]
+        public HttpPostedFileBase IMAGE_4;
+
+        [DataType(DataType.MultilineText)]
         [Display(Name = "Address")]
         [StringLength(1000, MinimumLength = 2)]
         public string ADDRESS;

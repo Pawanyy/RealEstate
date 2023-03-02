@@ -139,6 +139,8 @@
     <Compile Include="Controllers\Admin\StatesController.cs" />
     <Compile Include="Controllers\Admin\UsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PROPERTiesController.cs" />
+    <Compile Include="Controllers\RemoteController.cs" />
     <Compile Include="Controllers\User\UserController.cs" />
     <Compile Include="Controllers\Vendor\VendorController.cs" />
     <Compile Include="Global.asax.cs">
@@ -153,6 +155,7 @@
     </Compile>
     <Compile Include="Models\ContactMetaData.cs" />
     <Compile Include="Models\CountryMetaData.cs" />
+    <Compile Include="Models\PropertyMetaData.cs" />
     <Compile Include="Models\PropertyStatusMetaData.cs" />
     <Compile Include="Models\PropertyTypeMetaData.cs" />
     <Compile Include="Models\StateMetaData.cs" />
@@ -426,6 +429,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="System.Linq.Dynamic.dll" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -498,8 +502,17 @@
     <Content Include="Views\PropertyStatus\Details.cshtml" />
     <Content Include="Views\PropertyStatus\Edit.cshtml" />
     <Content Include="Views\PropertyStatus\Index.cshtml" />
+    <Content Include="Views\Vendor\AddProperty.cshtml" />
+    <Content Include="Views\PROPERTies\Create.cshtml" />
+    <Content Include="Views\PROPERTies\Delete.cshtml" />
+    <Content Include="Views\PROPERTies\Details.cshtml" />
+    <Content Include="Views\PROPERTies\Edit.cshtml" />
+    <Content Include="Views\PROPERTies\Index.cshtml" />
+    <Content Include="Views\Vendor\MyProperties.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Image\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
     <Content Include="Content\bootstrap.rtl.css.map" />

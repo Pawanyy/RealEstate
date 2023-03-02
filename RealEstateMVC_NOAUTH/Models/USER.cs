@@ -12,6 +12,7 @@ namespace RealEstateMVC_NOAUTH.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
 
     [MetadataType(typeof(UserMetaData))]
     public partial class USER
@@ -23,6 +24,8 @@ namespace RealEstateMVC_NOAUTH.Models
         }
     
         public int ID { get; set; }
+
+        [Remote("IsEmailExists", "Remote", ErrorMessage = "Email already in use")]
         public string EMAIL { get; set; }
         public string PASSWORD { get; set; }
         public string FULLNAME { get; set; }
