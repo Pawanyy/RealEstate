@@ -13,9 +13,13 @@
         body {
             background: #f3f8fc;
         }
-        .sidbar-link {
-            background: #808080;
-            text-decoration: none;
+        a.sidebar-link {
+            color: #808080;
+            text-decoration: none !important;
+        }
+
+        .sidebar div ul li.nav-item {
+            margin: 10px 20px !important;
         }
     </style>
     <nav class="navbar sticky-top navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary">
@@ -65,12 +69,12 @@
     </div>
     <div class="container body-content">
         <div class="row">
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <nav class="col-md-2 sidebar p-4 bg-white rounded text-light">
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="sidebar-link" href="#">
-
+                            <a class="sidebar-link" href="@Url.Action("Profile", "User")">
+                                <i class="bi-person fs-4"></i>
                                 Profile
                             </a>
                         </li>
