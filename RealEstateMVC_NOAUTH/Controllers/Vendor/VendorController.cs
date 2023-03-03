@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -239,8 +240,56 @@ namespace RealEstateMVC_NOAUTH.Controllers
         }
 
         public ActionResult MyProperties() {
-            var pROPERTies = db.PROPERTies.Include(p => p.CITY).Include(p => p.COUNTRY).Include(p => p.USER).Include(p => p.PROPERTY_TYPE).Include(p => p.STATE).Include(p => p.PROPERTY_STATUS);
+            int id = int.Parse(Session["userId"].ToString());
+            var pROPERTies = db.PROPERTies.Include(p => p.CITY).Include(p => p.COUNTRY).Include(p => p.USER).Include(p => p.PROPERTY_TYPE).Include(p => p.STATE).Include(p => p.PROPERTY_STATUS).Where(p => p.ADDED_BY_ID == id);
             return View(pROPERTies.ToList());
+        }
+
+        public ActionResult DetailsProperty(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PROPERTY pROPERTY = db.PROPERTies.Find(id);
+            if (pROPERTY == null)
+            {
+                return HttpNotFound();
+            }
+            return View(pROPERTY);
+        }
+
+        public ActionResult DeleteProperty(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PROPERTY pROPERTY = db.PROPERTies.Find(id);
+            if (pROPERTY == null)
+            {
+                return HttpNotFound();
+            }
+            return View(pROPERTY);
+        }
+
+        [HttpPost, ActionName("DeleteProperty")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePropertyConfirmed(int id)
+        {
+            PROPERTY pROPERTY = db.PROPERTies.Find(id);
+            db.PROPERTies.Remove(pROPERTY);
+            db.SaveChanges();
+            return RedirectToAction("MyProperties");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 
