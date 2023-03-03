@@ -142,7 +142,6 @@
     <Compile Include="Controllers\Admin\StatesController.cs" />
     <Compile Include="Controllers\Admin\UsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PROPERTiesController.cs" />
     <Compile Include="Controllers\RemoteController.cs" />
     <Compile Include="Controllers\User\UserController.cs" />
     <Compile Include="Controllers\Vendor\VendorController.cs" />
@@ -507,11 +506,6 @@
     <Content Include="Views\PropertyStatus\Edit.cshtml" />
     <Content Include="Views\PropertyStatus\Index.cshtml" />
     <Content Include="Views\Vendor\AddProperty.cshtml" />
-    <Content Include="Views\PROPERTies\Create.cshtml" />
-    <Content Include="Views\PROPERTies\Delete.cshtml" />
-    <Content Include="Views\PROPERTies\Details.cshtml" />
-    <Content Include="Views\PROPERTies\Edit.cshtml" />
-    <Content Include="Views\PROPERTies\Index.cshtml" />
     <Content Include="Views\Vendor\MyProperties.cshtml" />
     <Content Include="Views\Vendor\DetailsProperty.cshtml" />
     <Content Include="Views\Vendor\DeleteProperty.cshtml" />
