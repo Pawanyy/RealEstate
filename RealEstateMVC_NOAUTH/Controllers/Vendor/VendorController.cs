@@ -20,6 +20,11 @@ namespace RealEstateMVC_NOAUTH.Controllers
             return (Session.Count > 0 && Session["Type"].Equals("Vendor"));
         }
 
+        private int getUserID()
+        {
+            return int.Parse(Session["userId"].ToString());
+        }
+
         public ActionResult Index()
         {
             if (!IsLogin())
@@ -135,6 +140,11 @@ namespace RealEstateMVC_NOAUTH.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Profile([Bind(Include = "ID,EMAIL,PASSWORD,FULLNAME,MOBILE,ABOUT_ME,REGISTRATION_DATE")] USER uSER)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Login");
+            }
+
             if (ModelState.IsValid)
             {
                 uSER.ROLE_ID = db.USER_ROLE.Where(m => m.NAME.Equals("Vendor")).Single().ID;
@@ -147,13 +157,23 @@ namespace RealEstateMVC_NOAUTH.Controllers
         #region Property
         public ActionResult MyProperties()
         {
-            int id = int.Parse(Session["userId"].ToString());
+            if (!IsLogin())
+            {
+                return RedirectToAction("Login");
+            }
+
+            int id = getUserID();
             var pROPERTies = db.PROPERTies.Include(p => p.CITY).Include(p => p.COUNTRY).Include(p => p.USER).Include(p => p.PROPERTY_TYPE).Include(p => p.STATE).Include(p => p.PROPERTY_STATUS).Where(p => p.ADDED_BY_ID == id);
             return View(pROPERTies.ToList());
         }
 
         public ActionResult AddProperty()
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Login");
+            }
+
             ViewBag.CITY_ID = new SelectList(db.CITies, "ID", "NAME");
             ViewBag.COUNTRY_ID = new SelectList(db.COUNTRies, "ID", "NAME");
             ViewBag.ADDED_BY_ID = new SelectList(db.USERS, "ID", "EMAIL");
@@ -167,6 +187,12 @@ namespace RealEstateMVC_NOAUTH.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddProperty([Bind(Include = "NAME,DESCR,PROPERTY_TYPE_ID,STATUS_ID,LOCATION,BEDROOMS,BATHROOMS,FLOORS,GARAGES,AREA,PRICE,BEFORE_PRICE_LABEL,AFTER_PRICE_LABEL,FEATURES,IMAGE_1,IMAGE_2,IMAGE_3,IMAGE_4,ADDRESS,COUNTRY_ID,STATE_ID,CITY_ID,POSTAL_CODE,NEIGHBORHOOD")] PROPERTY pROPERTY)
         {
+
+            if (!IsLogin())
+            {
+                return RedirectToAction("Login");
+            }
+
             if (ModelState.IsValid)
             {
                 // Image 1
@@ -250,6 +276,11 @@ namespace RealEstateMVC_NOAUTH.Controllers
 
         public ActionResult EditProperty(int? id)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Login");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -272,6 +303,11 @@ namespace RealEstateMVC_NOAUTH.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditProperty([Bind(Include = "ID,NAME,DESCR,PROPERTY_TYPE_ID,STATUS_ID,LOCATION,BEDROOMS,BATHROOMS,FLOORS,GARAGES,AREA,PRICE,BEFORE_PRICE_LABEL,AFTER_PRICE_LABEL,FEATURES,IMG_1,IMG_2,IMG_3,IMG_4,ADDRESS,COUNTRY_ID,STATE_ID,CITY_ID,POSTAL_CODE,NEIGHBORHOOD,ADDED_BY_ID,ADDED_DATE")] PROPERTY pROPERTY)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Login");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(pROPERTY).State = EntityState.Modified;
@@ -289,6 +325,11 @@ namespace RealEstateMVC_NOAUTH.Controllers
 
         public ActionResult DetailsProperty(int? id)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Login");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -303,6 +344,11 @@ namespace RealEstateMVC_NOAUTH.Controllers
 
         public ActionResult DeleteProperty(int? id)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Login");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
