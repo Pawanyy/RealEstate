@@ -101,10 +101,10 @@ namespace RealEstateMVC_NOAUTH.Controllers.User
 
         public ActionResult Dashboard()
         {
-            //if (!IsLogin())
-            //{
-            //    return RedirectToAction("Login");
-            //}
+            if (!IsLogin())
+            {
+                return RedirectToAction("Login");
+            }
 
             return View();
         }
@@ -137,6 +137,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.User
         [ValidateAntiForgeryToken]
         public ActionResult Profile([Bind(Include = "ID,EMAIL,PASSWORD,FULLNAME,MOBILE,ABOUT_ME,REGISTRATION_DATE")] USER uSER)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Login");
+            }
+
             if (ModelState.IsValid)
             {
                 uSER.ROLE_ID = db.USER_ROLE.Where(m => m.NAME.Equals("User")).Single().ID;
