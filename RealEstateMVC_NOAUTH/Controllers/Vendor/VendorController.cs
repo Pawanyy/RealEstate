@@ -224,7 +224,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
                 pROPERTY.IMG_4 = "~/Image/" + _filename_4;
 
                 pROPERTY.ADDED_DATE = DateTime.Now;
-                pROPERTY.ADDED_BY_ID = int.Parse(Session["userId"].ToString());
+                pROPERTY.ADDED_BY_ID = getUserID();
                 db.PROPERTies.Add(pROPERTY);
 
                 string error = "";
@@ -296,7 +296,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
             ViewBag.PROPERTY_TYPE_ID = new SelectList(db.PROPERTY_TYPE, "ID", "NAME", pROPERTY.PROPERTY_TYPE_ID);
             ViewBag.STATE_ID = new SelectList(db.STATEs, "ID", "NAME", pROPERTY.STATE_ID);
             ViewBag.STATUS_ID = new SelectList(db.PROPERTY_STATUS, "ID", "STATUS", pROPERTY.STATUS_ID);
-            return View("Edit", pROPERTY);
+            return View(pROPERTY);
         }
 
         [HttpPost]
@@ -320,7 +320,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
             ViewBag.PROPERTY_TYPE_ID = new SelectList(db.PROPERTY_TYPE, "ID", "NAME", pROPERTY.PROPERTY_TYPE_ID);
             ViewBag.STATE_ID = new SelectList(db.STATEs, "ID", "NAME", pROPERTY.STATE_ID);
             ViewBag.STATUS_ID = new SelectList(db.PROPERTY_STATUS, "ID", "STATUS", pROPERTY.STATUS_ID);
-            return View("Edit", pROPERTY);
+            return View(pROPERTY);
         }
 
         public ActionResult DetailsProperty(int? id)
@@ -372,6 +372,8 @@ namespace RealEstateMVC_NOAUTH.Controllers
         }
 
         #endregion Property
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
