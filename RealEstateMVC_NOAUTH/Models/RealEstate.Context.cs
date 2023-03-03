@@ -31,6 +31,7 @@ namespace RealEstateMVC_NOAUTH.Models
         public virtual DbSet<COUNTRY> COUNTRies { get; set; }
         public virtual DbSet<FAQ> FAQS { get; set; }
         public virtual DbSet<PROPERTY> PROPERTies { get; set; }
+        public virtual DbSet<PROPERTY_QUERY> PROPERTY_QUERY { get; set; }
         public virtual DbSet<PROPERTY_STATUS> PROPERTY_STATUS { get; set; }
         public virtual DbSet<PROPERTY_TYPE> PROPERTY_TYPE { get; set; }
         public virtual DbSet<STATE> STATEs { get; set; }

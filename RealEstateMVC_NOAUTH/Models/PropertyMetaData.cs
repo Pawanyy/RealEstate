@@ -132,5 +132,10 @@ namespace RealEstateMVC_NOAUTH.Models
         [Display(Name = "Added Date")]
         public System.DateTime ADDED_DATE;
 
+        [NotMapped]
+        [DataType(DataType.Text)]
+        [Display(Name = "Like")]
+        public Nullable<int> LIKE;
+
     }
 }

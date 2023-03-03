@@ -79,6 +79,20 @@
           <Property Name="NEIGHBORHOOD" Type="varchar" MaxLength="255" />
           <Property Name="ADDED_BY_ID" Type="int" />
           <Property Name="ADDED_DATE" Type="datetime" Nullable="false" />
+          <Property Name="LIKE" Type="int" />
+        </EntityType>
+        <EntityType Name="PROPERTY_QUERY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QUESTION" Type="varchar(max)" />
+          <Property Name="ANSWER" Type="varchar(max)" />
+          <Property Name="PROPERTY_ID" Type="int" />
+          <Property Name="USER_ID" Type="int" />
+          <Property Name="VENDOR_ID" Type="int" />
+          <Property Name="Q_DATE" Type="datetime" />
+          <Property Name="A_DATE" Type="date" />
         </EntityType>
         <EntityType Name="PROPERTY_STATUS">
           <Key>
@@ -133,6 +147,42 @@
             </Principal>
             <Dependent Role="CITY">
               <PropertyRef Name="STATE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PROPERTY___PROPE__160F4887">
+          <End Role="PROPERTY" Type="Self.PROPERTY" Multiplicity="0..1" />
+          <End Role="PROPERTY_QUERY" Type="Self.PROPERTY_QUERY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROPERTY">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PROPERTY_QUERY">
+              <PropertyRef Name="PROPERTY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PROPERTY___USER___17F790F9">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+          <End Role="PROPERTY_QUERY" Type="Self.PROPERTY_QUERY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PROPERTY_QUERY">
+              <PropertyRef Name="USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PROPERTY___VENDO__17036CC0">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+          <End Role="PROPERTY_QUERY" Type="Self.PROPERTY_QUERY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PROPERTY_QUERY">
+              <PropertyRef Name="VENDOR_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -241,6 +291,7 @@
           <EntitySet Name="COUNTRY" EntityType="Self.COUNTRY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FAQS" EntityType="Self.FAQS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PROPERTY" EntityType="Self.PROPERTY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROPERTY_QUERY" EntityType="Self.PROPERTY_QUERY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PROPERTY_STATUS" EntityType="Self.PROPERTY_STATUS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PROPERTY_TYPE" EntityType="Self.PROPERTY_TYPE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="STATE" EntityType="Self.STATE" Schema="dbo" store:Type="Tables" />
@@ -249,6 +300,18 @@
           <AssociationSet Name="FK__CITY__STATE_ID__5CD6CB2B" Association="Self.FK__CITY__STATE_ID__5CD6CB2B">
             <End Role="STATE" EntitySet="STATE" />
             <End Role="CITY" EntitySet="CITY" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PROPERTY___PROPE__160F4887" Association="Self.FK__PROPERTY___PROPE__160F4887">
+            <End Role="PROPERTY" EntitySet="PROPERTY" />
+            <End Role="PROPERTY_QUERY" EntitySet="PROPERTY_QUERY" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PROPERTY___USER___17F790F9" Association="Self.FK__PROPERTY___USER___17F790F9">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="PROPERTY_QUERY" EntitySet="PROPERTY_QUERY" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PROPERTY___VENDO__17036CC0" Association="Self.FK__PROPERTY___VENDO__17036CC0">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="PROPERTY_QUERY" EntitySet="PROPERTY_QUERY" />
           </AssociationSet>
           <AssociationSet Name="FK__PROPERTY__ADDED___7E37BEF6" Association="Self.FK__PROPERTY__ADDED___7E37BEF6">
             <End Role="USERS" EntitySet="USERS" />
@@ -294,6 +357,7 @@
           <EntitySet Name="COUNTRies" EntityType="RealEstateModel.COUNTRY" />
           <EntitySet Name="FAQS" EntityType="RealEstateModel.FAQ" />
           <EntitySet Name="PROPERTies" EntityType="RealEstateModel.PROPERTY" />
+          <EntitySet Name="PROPERTY_QUERY" EntityType="RealEstateModel.PROPERTY_QUERY" />
           <EntitySet Name="PROPERTY_STATUS" EntityType="RealEstateModel.PROPERTY_STATUS" />
           <EntitySet Name="PROPERTY_TYPE" EntityType="RealEstateModel.PROPERTY_TYPE" />
           <EntitySet Name="STATEs" EntityType="RealEstateModel.STATE" />
@@ -315,6 +379,10 @@
             <End Role="COUNTRY" EntitySet="COUNTRies" />
             <End Role="STATE" EntitySet="STATEs" />
           </AssociationSet>
+          <AssociationSet Name="FK__PROPERTY___PROPE__160F4887" Association="RealEstateModel.FK__PROPERTY___PROPE__160F4887">
+            <End Role="PROPERTY" EntitySet="PROPERTies" />
+            <End Role="PROPERTY_QUERY" EntitySet="PROPERTY_QUERY" />
+          </AssociationSet>
           <AssociationSet Name="FK__PROPERTY__ADDED___7E37BEF6" Association="RealEstateModel.FK__PROPERTY__ADDED___7E37BEF6">
             <End Role="USER" EntitySet="USERS" />
             <End Role="PROPERTY" EntitySet="PROPERTies" />
@@ -330,6 +398,14 @@
           <AssociationSet Name="FK__PROPERTY__STATUS__76969D2E" Association="RealEstateModel.FK__PROPERTY__STATUS__76969D2E">
             <End Role="PROPERTY_STATUS" EntitySet="PROPERTY_STATUS" />
             <End Role="PROPERTY" EntitySet="PROPERTies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PROPERTY___USER___17F790F9" Association="RealEstateModel.FK__PROPERTY___USER___17F790F9">
+            <End Role="USER" EntitySet="USERS" />
+            <End Role="PROPERTY_QUERY" EntitySet="PROPERTY_QUERY" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PROPERTY___VENDO__17036CC0" Association="RealEstateModel.FK__PROPERTY___VENDO__17036CC0">
+            <End Role="USER" EntitySet="USERS" />
+            <End Role="PROPERTY_QUERY" EntitySet="PROPERTY_QUERY" />
           </AssociationSet>
           <AssociationSet Name="FK__USERS__ROLE_ID__02084FDA" Association="RealEstateModel.FK__USERS__ROLE_ID__02084FDA">
             <End Role="USER_ROLE" EntitySet="USER_ROLE" />
@@ -414,12 +490,30 @@
           <Property Name="NEIGHBORHOOD" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="ADDED_BY_ID" Type="Int32" />
           <Property Name="ADDED_DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LIKE" Type="Int32" />
           <NavigationProperty Name="CITY" Relationship="RealEstateModel.FK__PROPERTY__CITY_I__797309D9" FromRole="PROPERTY" ToRole="CITY" />
           <NavigationProperty Name="COUNTRY" Relationship="RealEstateModel.FK__PROPERTY__COUNTR__778AC167" FromRole="PROPERTY" ToRole="COUNTRY" />
+          <NavigationProperty Name="PROPERTY_QUERY" Relationship="RealEstateModel.FK__PROPERTY___PROPE__160F4887" FromRole="PROPERTY" ToRole="PROPERTY_QUERY" />
           <NavigationProperty Name="USER" Relationship="RealEstateModel.FK__PROPERTY__ADDED___7E37BEF6" FromRole="PROPERTY" ToRole="USER" />
           <NavigationProperty Name="PROPERTY_TYPE" Relationship="RealEstateModel.FK__PROPERTY__PROPER__75A278F5" FromRole="PROPERTY" ToRole="PROPERTY_TYPE" />
           <NavigationProperty Name="STATE" Relationship="RealEstateModel.FK__PROPERTY__STATE___787EE5A0" FromRole="PROPERTY" ToRole="STATE" />
           <NavigationProperty Name="PROPERTY_STATUS" Relationship="RealEstateModel.FK__PROPERTY__STATUS__76969D2E" FromRole="PROPERTY" ToRole="PROPERTY_STATUS" />
+        </EntityType>
+        <EntityType Name="PROPERTY_QUERY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QUESTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ANSWER" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PROPERTY_ID" Type="Int32" />
+          <Property Name="USER_ID" Type="Int32" />
+          <Property Name="VENDOR_ID" Type="Int32" />
+          <Property Name="Q_DATE" Type="DateTime" Precision="3" />
+          <Property Name="A_DATE" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="PROPERTY" Relationship="RealEstateModel.FK__PROPERTY___PROPE__160F4887" FromRole="PROPERTY_QUERY" ToRole="PROPERTY" />
+          <NavigationProperty Name="USER" Relationship="RealEstateModel.FK__PROPERTY___USER___17F790F9" FromRole="PROPERTY_QUERY" ToRole="USER" />
+          <NavigationProperty Name="USER1" Relationship="RealEstateModel.FK__PROPERTY___VENDO__17036CC0" FromRole="PROPERTY_QUERY" ToRole="USER" />
         </EntityType>
         <EntityType Name="PROPERTY_STATUS">
           <Key>
@@ -469,6 +563,8 @@
           <Property Name="ABOUT_ME" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="REGISTRATION_DATE" Type="DateTime" Precision="3" />
           <NavigationProperty Name="PROPERTies" Relationship="RealEstateModel.FK__PROPERTY__ADDED___7E37BEF6" FromRole="USER" ToRole="PROPERTY" />
+          <NavigationProperty Name="PROPERTY_QUERY" Relationship="RealEstateModel.FK__PROPERTY___USER___17F790F9" FromRole="USER" ToRole="PROPERTY_QUERY" />
+          <NavigationProperty Name="PROPERTY_QUERY1" Relationship="RealEstateModel.FK__PROPERTY___VENDO__17036CC0" FromRole="USER" ToRole="PROPERTY_QUERY" />
           <NavigationProperty Name="USER_ROLE" Relationship="RealEstateModel.FK__USERS__ROLE_ID__02084FDA" FromRole="USER" ToRole="USER_ROLE" />
         </EntityType>
         <Association Name="FK__CITY__STATE_ID__5CD6CB2B">
@@ -523,6 +619,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__PROPERTY___PROPE__160F4887">
+          <End Type="RealEstateModel.PROPERTY" Role="PROPERTY" Multiplicity="0..1" />
+          <End Type="RealEstateModel.PROPERTY_QUERY" Role="PROPERTY_QUERY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROPERTY">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PROPERTY_QUERY">
+              <PropertyRef Name="PROPERTY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__PROPERTY__ADDED___7E37BEF6">
           <End Type="RealEstateModel.USER" Role="USER" Multiplicity="0..1" />
           <End Type="RealEstateModel.PROPERTY" Role="PROPERTY" Multiplicity="*" />
@@ -568,6 +676,30 @@
             </Principal>
             <Dependent Role="PROPERTY">
               <PropertyRef Name="STATUS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PROPERTY___USER___17F790F9">
+          <End Type="RealEstateModel.USER" Role="USER" Multiplicity="0..1" />
+          <End Type="RealEstateModel.PROPERTY_QUERY" Role="PROPERTY_QUERY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PROPERTY_QUERY">
+              <PropertyRef Name="USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PROPERTY___VENDO__17036CC0">
+          <End Type="RealEstateModel.USER" Role="USER" Multiplicity="0..1" />
+          <End Type="RealEstateModel.PROPERTY_QUERY" Role="PROPERTY_QUERY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PROPERTY_QUERY">
+              <PropertyRef Name="VENDOR_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -640,6 +772,7 @@
           <EntitySetMapping Name="PROPERTies">
             <EntityTypeMapping TypeName="RealEstateModel.PROPERTY">
               <MappingFragment StoreEntitySet="PROPERTY">
+                <ScalarProperty Name="LIKE" ColumnName="LIKE" />
                 <ScalarProperty Name="ADDED_DATE" ColumnName="ADDED_DATE" />
                 <ScalarProperty Name="ADDED_BY_ID" ColumnName="ADDED_BY_ID" />
                 <ScalarProperty Name="NEIGHBORHOOD" ColumnName="NEIGHBORHOOD" />
@@ -666,6 +799,20 @@
                 <ScalarProperty Name="PROPERTY_TYPE_ID" ColumnName="PROPERTY_TYPE_ID" />
                 <ScalarProperty Name="DESCR" ColumnName="DESCR" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROPERTY_QUERY">
+            <EntityTypeMapping TypeName="RealEstateModel.PROPERTY_QUERY">
+              <MappingFragment StoreEntitySet="PROPERTY_QUERY">
+                <ScalarProperty Name="A_DATE" ColumnName="A_DATE" />
+                <ScalarProperty Name="Q_DATE" ColumnName="Q_DATE" />
+                <ScalarProperty Name="VENDOR_ID" ColumnName="VENDOR_ID" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="PROPERTY_ID" ColumnName="PROPERTY_ID" />
+                <ScalarProperty Name="ANSWER" ColumnName="ANSWER" />
+                <ScalarProperty Name="QUESTION" ColumnName="QUESTION" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
