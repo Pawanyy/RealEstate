@@ -518,6 +518,9 @@
     <Content Include="Views\Vendor\EditProperty.cshtml" />
     <Content Include="Views\Home\Properties.cshtml" />
     <Content Include="Views\Home\PropertyDetails.cshtml" />
+    <Content Include="Views\Vendor\ReceivedQuery.cshtml" />
+    <Content Include="Views\Vendor\AnsweredQuery.cshtml" />
+    <Content Include="Views\Vendor\AnswerQuery.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

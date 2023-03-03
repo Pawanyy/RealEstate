@@ -1,4 +1,5 @@
-﻿using RealEstateMVC_NOAUTH.Models;
+﻿using Microsoft.Ajax.Utilities;
+using RealEstateMVC_NOAUTH.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -32,7 +33,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
                 return RedirectToAction("Login");
             }
 
-            return RedirectToAction("Login", "Vendor");
+            return RedirectToAction("Dashboard", "Vendor");
         }
 
         #region VendorAuth
@@ -372,6 +373,76 @@ namespace RealEstateMVC_NOAUTH.Controllers
         }
 
         #endregion Property
+
+        public ActionResult ReceivedQuery()
+        {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Login");
+            }
+
+            int userId = getUserID();
+            var pROPERTY_QUERY = db.PROPERTY_QUERY.Include(p => p.PROPERTY)
+                                                  .Include(p => p.USER)
+                                                  .Include(p => p.USER1)
+                                                  .Where(p => p.VENDOR_ID == userId)
+                                                  .OrderByDescending(p => p.Q_DATE); ;
+            return View(pROPERTY_QUERY.ToList());
+        }
+
+        public ActionResult AnsweredQuery()
+        {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Login");
+            }
+
+            int userId = getUserID();
+            var pROPERTY_QUERY = db.PROPERTY_QUERY.Include(p => p.PROPERTY)
+                                                  .Include(p => p.USER)
+                                                  .Include(p => p.USER1)
+                                                  .Where(p => p.A_DATE != null && p.ANSWER != "" && p.VENDOR_ID == userId)
+                                                  .OrderByDescending(p => p.A_DATE);
+            return View(pROPERTY_QUERY.ToList());
+        }
+
+        public ActionResult AnswerQuery(int? id)
+        {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Login");
+            }
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PROPERTY_QUERY pROPERTY_QUERY = db.PROPERTY_QUERY.Find(id);
+            if (pROPERTY_QUERY == null)
+            {
+                return HttpNotFound();
+            }
+            return View(pROPERTY_QUERY);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AnswerQuery([Bind(Include = "ID,QUESTION,ANSWER,PROPERTY_ID,USER_ID,VENDOR_ID,Q_DATE")] PROPERTY_QUERY pROPERTY_QUERY)
+        {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Login");
+            }
+
+            if (ModelState.IsValid)
+            {
+                pROPERTY_QUERY.A_DATE = DateTime.Now;
+                db.Entry(pROPERTY_QUERY).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("ReceivedQuery");
+            }
+            return View(pROPERTY_QUERY);
+        }
 
 
         protected override void Dispose(bool disposing)
