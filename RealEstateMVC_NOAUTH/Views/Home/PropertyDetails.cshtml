@@ -39,6 +39,11 @@
                 ⭐⭐⭐⭐⭐
             </span>
         </div>
+        <div class="col-12 pt-3">
+            <div class="d-flex justify-content-between">
+                <span class="badge bg-info fs-5">@Html.DisplayFor(model => model.PROPERTY_STATUS.STATUS)</span>
+            </div>
+        </div>
     </div>
 
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -79,15 +84,15 @@
         <p>@Html.DisplayFor(model => model.DESCR)</p>
     </div>
 
-    <div class="mx-3 px-3 mb-3">
+    <div class="mx-3 px-3 mb-3 w-100">
         <hr />
         <h4>Condition</h4>
         <div>
             <ul class="condition-list w-50">
-                <li>@Html.DisplayFor(model => model.BEDROOMS): @Html.DisplayNameFor(model => model.BEDROOMS)</li>
-                <li>@Html.DisplayFor(model => model.BATHROOMS): @Html.DisplayNameFor(model => model.BATHROOMS)</li>
-                <li>@Html.DisplayFor(model => model.FLOORS): @Html.DisplayNameFor(model => model.FLOORS)</li>
-                <li>@Html.DisplayFor(model => model.GARAGES): @Html.DisplayNameFor(model => model.GARAGES)</li>
+                <li>@Html.DisplayNameFor(model => model.BEDROOMS): @Html.DisplayFor(model => model.BEDROOMS)</li>
+                <li>@Html.DisplayNameFor(model => model.BATHROOMS): @Html.DisplayFor(model => model.BATHROOMS)</li>
+                <li>@Html.DisplayNameFor(model => model.FLOORS): @Html.DisplayFor(model => model.FLOORS)</li>
+                <li>@Html.DisplayNameFor(model => model.GARAGES): @Html.DisplayFor(model => model.GARAGES)</li>
             </ul>
         </div>
     </div>
@@ -129,6 +134,7 @@
             <small class="text-muted">@TimeAgo.getTimeAgo(@Html.DisplayFor(model => model.ADDED_DATE).ToString())</small>
         </div>
     </div>
+
 
 
 </div>
