@@ -30,7 +30,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
             return RedirectToAction("Login", "Vendor");
         }
 
-        // GET: User
+        #region VendorAuth
         public ActionResult Login()
         {
             if (IsLogin())
@@ -96,20 +96,21 @@ namespace RealEstateMVC_NOAUTH.Controllers
             return View(uSER);
         }
 
-        public ActionResult Dashboard()
-        {
-            //if (!IsLogin())
-            //{
-            //    return RedirectToAction("Login");
-            //}
-
-            return View();
-        }
-
         public ActionResult Logout()
         {
             Session.RemoveAll();
             return RedirectToAction("Index");
+        }
+
+        #endregion VendorAuth
+        public ActionResult Dashboard()
+        {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Login");
+            }
+
+            return View();
         }
 
         public ActionResult Profile()
@@ -141,6 +142,14 @@ namespace RealEstateMVC_NOAUTH.Controllers
                 db.SaveChanges();
             }
             return View(uSER);
+        }
+
+        #region Property
+        public ActionResult MyProperties()
+        {
+            int id = int.Parse(Session["userId"].ToString());
+            var pROPERTies = db.PROPERTies.Include(p => p.CITY).Include(p => p.COUNTRY).Include(p => p.USER).Include(p => p.PROPERTY_TYPE).Include(p => p.STATE).Include(p => p.PROPERTY_STATUS).Where(p => p.ADDED_BY_ID == id);
+            return View(pROPERTies.ToList());
         }
 
         public ActionResult AddProperty()
@@ -239,10 +248,43 @@ namespace RealEstateMVC_NOAUTH.Controllers
             return View(pROPERTY);
         }
 
-        public ActionResult MyProperties() {
-            int id = int.Parse(Session["userId"].ToString());
-            var pROPERTies = db.PROPERTies.Include(p => p.CITY).Include(p => p.COUNTRY).Include(p => p.USER).Include(p => p.PROPERTY_TYPE).Include(p => p.STATE).Include(p => p.PROPERTY_STATUS).Where(p => p.ADDED_BY_ID == id);
-            return View(pROPERTies.ToList());
+        public ActionResult EditProperty(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PROPERTY pROPERTY = db.PROPERTies.Find(id);
+            if (pROPERTY == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.CITY_ID = new SelectList(db.CITies, "ID", "NAME", pROPERTY.CITY_ID);
+            ViewBag.COUNTRY_ID = new SelectList(db.COUNTRies, "ID", "NAME", pROPERTY.COUNTRY_ID);
+            ViewBag.ADDED_BY_ID = new SelectList(db.USERS, "ID", "EMAIL", pROPERTY.ADDED_BY_ID);
+            ViewBag.PROPERTY_TYPE_ID = new SelectList(db.PROPERTY_TYPE, "ID", "NAME", pROPERTY.PROPERTY_TYPE_ID);
+            ViewBag.STATE_ID = new SelectList(db.STATEs, "ID", "NAME", pROPERTY.STATE_ID);
+            ViewBag.STATUS_ID = new SelectList(db.PROPERTY_STATUS, "ID", "STATUS", pROPERTY.STATUS_ID);
+            return View("Edit", pROPERTY);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditProperty([Bind(Include = "ID,NAME,DESCR,PROPERTY_TYPE_ID,STATUS_ID,LOCATION,BEDROOMS,BATHROOMS,FLOORS,GARAGES,AREA,PRICE,BEFORE_PRICE_LABEL,AFTER_PRICE_LABEL,FEATURES,IMG_1,IMG_2,IMG_3,IMG_4,ADDRESS,COUNTRY_ID,STATE_ID,CITY_ID,POSTAL_CODE,NEIGHBORHOOD,ADDED_BY_ID,ADDED_DATE")] PROPERTY pROPERTY)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(pROPERTY).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.CITY_ID = new SelectList(db.CITies, "ID", "NAME", pROPERTY.CITY_ID);
+            ViewBag.COUNTRY_ID = new SelectList(db.COUNTRies, "ID", "NAME", pROPERTY.COUNTRY_ID);
+            ViewBag.ADDED_BY_ID = new SelectList(db.USERS, "ID", "EMAIL", pROPERTY.ADDED_BY_ID);
+            ViewBag.PROPERTY_TYPE_ID = new SelectList(db.PROPERTY_TYPE, "ID", "NAME", pROPERTY.PROPERTY_TYPE_ID);
+            ViewBag.STATE_ID = new SelectList(db.STATEs, "ID", "NAME", pROPERTY.STATE_ID);
+            ViewBag.STATUS_ID = new SelectList(db.PROPERTY_STATUS, "ID", "STATUS", pROPERTY.STATUS_ID);
+            return View("Edit", pROPERTY);
         }
 
         public ActionResult DetailsProperty(int? id)
@@ -283,6 +325,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
             return RedirectToAction("MyProperties");
         }
 
+        #endregion Property
         protected override void Dispose(bool disposing)
         {
             if (disposing)
