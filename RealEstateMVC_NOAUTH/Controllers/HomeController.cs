@@ -1,7 +1,9 @@
 ﻿using RealEstateMVC_NOAUTH.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -47,6 +49,33 @@ namespace RealEstateMVC_NOAUTH.Controllers
 
             return View(cONTACT);
         }
+
+        public ActionResult Properties()
+        {
+            var pROPERTies = db.PROPERTies.Include(p => p.CITY)
+                .Include(p => p.COUNTRY)
+                .Include(p => p.PROPERTY_TYPE)
+                .Include(p => p.STATE)
+                .Include(p => p.PROPERTY_STATUS)
+                .Include(p => p.USER);
+            return View(pROPERTies.ToList());
+        }
+
+        public ActionResult PropertyDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PROPERTY pROPERTY = db.PROPERTies.Find(id);
+            if (pROPERTY == null)
+            {
+                return HttpNotFound();
+            }
+            return View(pROPERTY);
+        }
+
+
 
         public ActionResult Login()
         {

@@ -1,0 +1,99 @@
+﻿@model IEnumerable<RealEstateMVC_NOAUTH.Models.PROPERTY>
+
+@{
+    ViewBag.Title = "Properties";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .card-body .detail .title {
+        font-size: 18px !important;
+        font-weight: 500 !important;
+        margin-bottom: 10px !important;
+    }
+    .card-body .detail .title a, .detail .location a {
+        text-decoration: none !important;
+    }
+    .card-body .detail .location a {
+        font-size: 13px;
+        color: #535353;
+        font-weight: 400;
+    }
+
+    .card-body .detail .location {
+        margin: 0 0 15px;
+    }
+
+    .card-body ul li {
+        list-style: none;
+        width: 50%;
+        float: left;
+        font-weight: 400;
+        line-height: 35px;
+        font-size: 13px;
+    }
+</style>
+<main role="main">
+
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Browse Properties</h1>
+            <p class="lead text-muted mx-5 px-5">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+            <p>
+                <a href="@Url.Action("Index", "Home")" class="btn btn-primary my-2">Home</a>
+                <a href="@Url.Action("Contact", "Home")" class="btn btn-secondary my-2">Contact Us</a>
+            </p>
+        </div>
+    </section>
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+
+            <div class="row">
+
+                @foreach (var item in Model)
+                {
+
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img src="@Url.Content(@Html.DisplayFor(modelItem => item.IMG_1).ToString())" class="card-img-top" data-holder-rendered="true">
+                            <div class="card-body">
+                                <div class="detail">
+                                    <h1 class="title">
+                                        <a href="@Url.Action("PropertyDetails", "Home", new { id = item.ID })">@Html.DisplayFor(modelItem => item.NAME)</a>
+                                    </h1>
+                                    <div class="location">
+                                        <a href="@Url.Action("PropertyDetails", "Home", new { id = item.ID })">
+                                            <i class="bi-geo-alt-fill fs-6 me-2"></i>@Html.DisplayFor(modelItem => item.LOCATION)
+                                        </a>
+                                    </div>
+                                    <ul class="facilities-list clearfix">
+                                        <li>
+                                            <i class="bi-segmented-nav fs-6 me-2"></i> @Html.DisplayFor(modelItem => item.BEDROOMS) : Bedroom
+                                        </li>
+                                        <li>
+                                            <i class="bi-building fs-6 me-2"></i> @Html.DisplayFor(modelItem => item.FLOORS) : Floor
+                                        </li>
+                                        <li>
+                                            <i class="bi-table fs-6 me-2"></i>@Html.DisplayFor(modelItem => item.AREA) Sq Ft
+                                        </li>
+                                        <li>
+                                            <i class="bi-bucket fs-6 me-2"></i> @Html.DisplayFor(modelItem => item.BATHROOMS) : Bathroom
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-white">
+                                <div class="d-flex justify-content-between">
+                                    <span><i class="bi-person-fill fs-6 me-2"></i>@Html.DisplayFor(modelItem => item.USER.FULLNAME)</span>
+                                    <small class="text-muted">@TimeAgo.getTimeAgo(@Html.DisplayFor(modelItem => item.ADDED_DATE).ToString())</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                }
+            </div>
+        </div>
+    </div>
+
+</main>
