@@ -31,7 +31,7 @@
                     @if (Session["Email"] == null)
                     {
                         @Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "btn btn-success" })
-                        @Html.ActionLink("Sign Up", "Login", "Home", new { area = "" }, new { @class = "btn btn-info ms-2" })
+                        @Html.ActionLink("Sign Up", "Register", "User", new { area = "" }, new { @class = "btn btn-info ms-2" })
                     }
                     else
                     {
