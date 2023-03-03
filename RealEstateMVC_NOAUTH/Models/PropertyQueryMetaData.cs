@@ -18,14 +18,12 @@ namespace RealEstateMVC_NOAUTH.Models
         [StringLength(255, MinimumLength = 2)]
         public string ANSWER;
 
-        [DataType(DataType.Text)]
+        [DataType(DataType.DateTime)]
         [Display(Name = "Question Date")]
-        [StringLength(255, MinimumLength = 2)]
         public Nullable<System.DateTime> Q_DATE;
 
-        [DataType(DataType.Text)]
+        [DataType(DataType.DateTime)]
         [Display(Name = "Answer Date")]
-        [StringLength(255, MinimumLength = 2)]
         public Nullable<System.DateTime> A_DATE;
     }
 }
