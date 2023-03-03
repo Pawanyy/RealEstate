@@ -6,11 +6,15 @@
 }
 
 <h2>My Properties</h2>
-
+<style>
+    .img-property {
+        width:75px;
+    }
+</style>
 <div class="table-responsive">
 
 
-    <table class="table">
+    <table class="table table-bordered table-striped">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.NAME)
@@ -133,16 +137,16 @@
                     @Html.DisplayFor(modelItem => item.FEATURES)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IMG_1)
+                    <img src="@Url.Content(item.IMG_1)" class="img-property" />
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IMG_2)
+                    <img src="@Url.Content(item.IMG_2)" class="img-property" />
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IMG_3)
+                    <img src="@Url.Content(item.IMG_3)" class="img-property" />
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IMG_4)
+                    <img src="@Url.Content(item.IMG_4)" class="img-property" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ADDRESS)

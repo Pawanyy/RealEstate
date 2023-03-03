@@ -164,28 +164,28 @@ namespace RealEstateMVC_NOAUTH.Controllers
                 string _filename_1 = DateTime.Now.ToString("hhmmssfff") + filename_1;
                 string path_1 = Path.Combine(Server.MapPath("~/Image/"), _filename_1);
 
-                pROPERTY.IMG_1 = "~/Image" + _filename_1;
+                pROPERTY.IMG_1 = "~/Image/" + _filename_1;
 
                 // Image 2
                 string filename_2 = Path.GetFileName(pROPERTY.IMAGE_2.FileName);
                 string _filename_2 = DateTime.Now.ToString("hhmmssfff") + filename_2;
                 string path_2 = Path.Combine(Server.MapPath("~/Image/"), _filename_2);
 
-                pROPERTY.IMG_2 = "~/Image" + _filename_2;
+                pROPERTY.IMG_2 = "~/Image/" + _filename_2;
 
                 // Image 3
                 string filename_3 = Path.GetFileName(pROPERTY.IMAGE_3.FileName);
                 string _filename_3 = DateTime.Now.ToString("hhmmssfff") + filename_3;
                 string path_3 = Path.Combine(Server.MapPath("~/Image/"), _filename_3);
 
-                pROPERTY.IMG_3 = "~/Image" + _filename_3;
+                pROPERTY.IMG_3 = "~/Image/" + _filename_3;
 
                 // Image 4
                 string filename_4 = Path.GetFileName(pROPERTY.IMAGE_4.FileName);
                 string _filename_4 = DateTime.Now.ToString("hhmmssfff") + filename_4;
                 string path_4 = Path.Combine(Server.MapPath("~/Image/"), _filename_4);
 
-                pROPERTY.IMG_4 = "~/Image" + _filename_4;
+                pROPERTY.IMG_4 = "~/Image/" + _filename_4;
 
                 pROPERTY.ADDED_DATE = DateTime.Now;
                 pROPERTY.ADDED_BY_ID = int.Parse(Session["userId"].ToString());
