@@ -18,6 +18,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.User
             return (Session.Count > 0 && Session["Type"].Equals("User"));
         }
 
+        private int getUserID()
+        {
+            return int.Parse(Session["userId"].ToString());
+        }
+
         public ActionResult Index()
         {
             if (!IsLogin())
@@ -139,6 +144,33 @@ namespace RealEstateMVC_NOAUTH.Controllers.User
                 db.SaveChanges();
             }
             return View(uSER);
+        }
+
+        [HttpPost]
+        public ActionResult SendQuery(string QUESTION, int ID)
+        {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Login");
+            }
+
+            PROPERTY_QUERY pROPERTY_QUERY = new PROPERTY_QUERY();
+
+            pROPERTY_QUERY.QUESTION = QUESTION;
+            pROPERTY_QUERY.USER_ID = getUserID();
+            pROPERTY_QUERY.VENDOR_ID = db.PROPERTies.Find(ID).ADDED_BY_ID;
+            pROPERTY_QUERY.PROPERTY_ID = ID;
+            pROPERTY_QUERY.Q_DATE = DateTime.Now;
+
+            db.PROPERTY_QUERY.Add(pROPERTY_QUERY);
+            db.SaveChanges();
+
+            TempData["Message"] = @"<div class=""alert alert-success alert-dismissible fade show"" role=""alert"">
+                                <strong>Success! </strong>Message Sent!
+                                <button type=""button"" class=""btn-close"" data-bs-dismiss=""alert"" aria-label=""Close""></button>
+                            </div>";
+
+            return RedirectToAction("PropertyDetails", "Home", new { ID });
         }
 
     }

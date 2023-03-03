@@ -134,7 +134,33 @@
             <small class="text-muted">@TimeAgo.getTimeAgo(@Html.DisplayFor(model => model.ADDED_DATE).ToString())</small>
         </div>
     </div>
+    @if (Session["Email"] != null && (Session["Type"].Equals("User")))
+    {
+        <div class="mx-3 mt-3 px-3 mb-3">
+            <hr />
+            @using (Html.BeginForm("SendQuery", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    <h4>Have Intrest</h4>
+                    <hr />
+                    <div class="form-group mb-3">
+                        <div class="col-md-10">
+                            <label class="mb-2" for="QUESTION">Message</label>
+                            <textarea rows="3" cols="30" class="form-control" id="QUESTION" name="QUESTION" style="max-width:400px"></textarea>
+                            <input type="hidden" name="ID" value="@Html.DisplayFor(model => model.ID)" />
+                        </div>
+                    </div>
 
+                    <div class="form-group mb-2">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Send Message" class="btn btn-primary" />
+                        </div>
+                    </div>
 
-
-</div>
+                    @Html.Raw(TempData["Message"])
+                </div>
+            }
+        </div>
+    }
+    </div>
