@@ -13,7 +13,7 @@ namespace RealEstateMVC_NOAUTH.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
-
+    
     [MetadataType(typeof(UserMetaData))]
     public partial class USER
     {
@@ -21,6 +21,8 @@ namespace RealEstateMVC_NOAUTH.Models
         public USER()
         {
             this.PROPERTies = new HashSet<PROPERTY>();
+            this.PROPERTY_QUERY = new HashSet<PROPERTY_QUERY>();
+            this.PROPERTY_QUERY1 = new HashSet<PROPERTY_QUERY>();
         }
     
         public int ID { get; set; }
@@ -36,6 +38,10 @@ namespace RealEstateMVC_NOAUTH.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PROPERTY> PROPERTies { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PROPERTY_QUERY> PROPERTY_QUERY { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PROPERTY_QUERY> PROPERTY_QUERY1 { get; set; }
         public virtual USER_ROLE USER_ROLE { get; set; }
     }
 }

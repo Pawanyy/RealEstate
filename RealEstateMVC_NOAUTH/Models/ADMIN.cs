@@ -12,7 +12,7 @@ namespace RealEstateMVC_NOAUTH.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
+    
     [MetadataType(typeof(AdminMetaData))]
     public partial class ADMIN
     {

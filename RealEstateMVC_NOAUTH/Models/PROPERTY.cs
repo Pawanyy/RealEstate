@@ -13,10 +13,16 @@ namespace RealEstateMVC_NOAUTH.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web;
-
+    
     [MetadataType(typeof(PropertyMetaData))]
     public partial class PROPERTY
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PROPERTY()
+        {
+            this.PROPERTY_QUERY = new HashSet<PROPERTY_QUERY>();
+        }
+    
         public int ID { get; set; }
         public string NAME { get; set; }
         public string DESCR { get; set; }
@@ -50,9 +56,12 @@ namespace RealEstateMVC_NOAUTH.Models
         public string NEIGHBORHOOD { get; set; }
         public Nullable<int> ADDED_BY_ID { get; set; }
         public System.DateTime ADDED_DATE { get; set; }
+        public Nullable<int> LIKE { get; set; }
     
         public virtual CITY CITY { get; set; }
         public virtual COUNTRY COUNTRY { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PROPERTY_QUERY> PROPERTY_QUERY { get; set; }
         public virtual USER USER { get; set; }
         public virtual PROPERTY_TYPE PROPERTY_TYPE { get; set; }
         public virtual STATE STATE { get; set; }

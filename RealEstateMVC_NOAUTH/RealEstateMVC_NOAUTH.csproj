@@ -160,8 +160,12 @@
     <Compile Include="Models\ContactMetaData.cs" />
     <Compile Include="Models\CountryMetaData.cs" />
     <Compile Include="Models\PropertyMetaData.cs" />
+    <Compile Include="Models\PropertyQueryMetaData.cs" />
     <Compile Include="Models\PropertyStatusMetaData.cs" />
     <Compile Include="Models\PropertyTypeMetaData.cs" />
+    <Compile Include="Models\PROPERTY_QUERY.cs">
+      <DependentUpon>RealEstate.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\StateMetaData.cs" />
     <Compile Include="Models\CityMetaData.cs" />
     <Compile Include="Models\CONTACT.cs">
@@ -472,11 +476,6 @@
     <Content Include="Views\Cities\Details.cshtml" />
     <Content Include="Views\Cities\Edit.cshtml" />
     <Content Include="Views\Cities\Index.cshtml" />
-    <Content Include="Views\PropertyType\Create.cshtml" />
-    <Content Include="Views\PropertyType\Delete.cshtml" />
-    <Content Include="Views\PropertyType\Details.cshtml" />
-    <Content Include="Views\PropertyType\Edit.cshtml" />
-    <Content Include="Views\PropertyType\Index.cshtml" />
     <Content Include="Views\PropertyTypes\Create.cshtml" />
     <Content Include="Views\PropertyTypes\Delete.cshtml" />
     <Content Include="Views\PropertyTypes\Details.cshtml" />

@@ -12,7 +12,7 @@ namespace RealEstateMVC_NOAUTH.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
+    
     [MetadataType(typeof(StateMetaData))]
     public partial class STATE
     {
