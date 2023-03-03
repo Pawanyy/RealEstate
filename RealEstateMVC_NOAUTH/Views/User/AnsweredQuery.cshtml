@@ -1,0 +1,64 @@
+﻿@model IEnumerable<RealEstateMVC_NOAUTH.Models.PROPERTY_QUERY>
+
+@{
+    ViewBag.Title = "Answered Queries";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.QUESTION)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ANSWER)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Q_DATE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.A_DATE)
+            </th>
+            <th>
+                Property Name
+            </th>
+            <th>
+                User Data
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QUESTION)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ANSWER)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Q_DATE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.A_DATE)
+                </td>
+                <td>
+                    @{ int ID = int.Parse(@Html.DisplayFor(modelItem => item.PROPERTY.ID).ToString());}
+                    <a href="@Url.Action("PropertyDetails", "Home", new { ID })">
+                        @Html.DisplayFor(modelItem => item.PROPERTY.NAME)
+                    </a>
+                </td>
+                <td>
+                    Name: @Html.DisplayFor(modelItem => item.USER.FULLNAME)<br />
+                    Email: @Html.DisplayFor(modelItem => item.USER.EMAIL)<br />
+                    Phone: @Html.DisplayFor(modelItem => item.USER.MOBILE)<br />
+                    About Me: @Html.DisplayFor(modelItem => item.USER.ABOUT_ME)<br />
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

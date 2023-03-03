@@ -385,7 +385,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
             var pROPERTY_QUERY = db.PROPERTY_QUERY.Include(p => p.PROPERTY)
                                                   .Include(p => p.USER)
                                                   .Include(p => p.USER1)
-                                                  .Where(p => p.VENDOR_ID == userId)
+                                                  .Where(p => p.A_DATE == null && p.ANSWER == null && p.VENDOR_ID == userId)
                                                   .OrderByDescending(p => p.Q_DATE); ;
             return View(pROPERTY_QUERY.ToList());
         }
@@ -401,7 +401,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
             var pROPERTY_QUERY = db.PROPERTY_QUERY.Include(p => p.PROPERTY)
                                                   .Include(p => p.USER)
                                                   .Include(p => p.USER1)
-                                                  .Where(p => p.A_DATE != null && p.ANSWER != "" && p.VENDOR_ID == userId)
+                                                  .Where(p => p.A_DATE != null && p.ANSWER != null && p.VENDOR_ID == userId)
                                                   .OrderByDescending(p => p.A_DATE);
             return View(pROPERTY_QUERY.ToList());
         }

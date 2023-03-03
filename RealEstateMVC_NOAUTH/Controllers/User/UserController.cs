@@ -173,5 +173,38 @@ namespace RealEstateMVC_NOAUTH.Controllers.User
             return RedirectToAction("PropertyDetails", "Home", new { ID });
         }
 
+        public ActionResult AskedQuery()
+        {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Login");
+            }
+
+            int userId = getUserID();
+            var pROPERTY_QUERY = db.PROPERTY_QUERY.Include(p => p.PROPERTY)
+                                                  .Include(p => p.USER)
+                                                  .Include(p => p.USER1)
+                                                  .Where(p => p.A_DATE == null && p.ANSWER == null && p.USER_ID == userId)
+                                                  .OrderByDescending(p => p.Q_DATE); ;
+            return View(pROPERTY_QUERY.ToList());
+        }
+
+        public ActionResult AnsweredQuery()
+        {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Login");
+            }
+
+            int userId = getUserID();
+            var pROPERTY_QUERY = db.PROPERTY_QUERY.Include(p => p.PROPERTY)
+                                                  .Include(p => p.USER)
+                                                  .Include(p => p.USER1)
+                                                  .Where(p => p.A_DATE != null && p.ANSWER != null && p.USER_ID == userId)
+                                                  .OrderByDescending(p => p.A_DATE);
+            return View(pROPERTY_QUERY.ToList());
+        }
+
+
     }
 }

@@ -521,6 +521,8 @@
     <Content Include="Views\Vendor\ReceivedQuery.cshtml" />
     <Content Include="Views\Vendor\AnsweredQuery.cshtml" />
     <Content Include="Views\Vendor\AnswerQuery.cshtml" />
+    <Content Include="Views\User\AnsweredQuery.cshtml" />
+    <Content Include="Views\User\AskedQuery.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
