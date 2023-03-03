@@ -518,6 +518,7 @@
     <Content Include="Views\Vendor\DeleteProperty.cshtml" />
     <Content Include="Views\Vendor\EditProperty.cshtml" />
     <Content Include="Views\Home\Properties.cshtml" />
+    <Content Include="Views\Home\PropertyDetails.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
