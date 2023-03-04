@@ -10,18 +10,14 @@ using RealEstateMVC_NOAUTH.Models;
 
 namespace RealEstateMVC_NOAUTH.Controllers.Admin
 {
-    public class ContactsController : Controller
+    public class ContactsController : AuthController
     {
         private RealEstateEntities db = new RealEstateEntities();
-        private bool IsLogin()
-        {
-            return (Session.Count > 0 && Session["Type"].Equals("Admin"));
-        }
 
         // GET: Contacts
         public ActionResult Index()
         {
-            if (!IsLogin())
+            if (!IsAdminLogin())
             {
                 return RedirectToAction("Index", "Admin");
             }
@@ -31,7 +27,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: Contacts/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (!IsLogin())
+            if (!IsAdminLogin())
             {
                 return RedirectToAction("Index", "Admin");
             }
@@ -53,7 +49,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            if (!IsLogin())
+            if (!IsAdminLogin())
             {
                 return RedirectToAction("Index", "Admin");
             }

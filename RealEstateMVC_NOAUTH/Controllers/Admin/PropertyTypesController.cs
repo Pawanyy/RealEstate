@@ -10,18 +10,14 @@ using RealEstateMVC_NOAUTH.Models;
 
 namespace RealEstateMVC_NOAUTH.Controllers.Admin
 {
-    public class PropertyTypesController : Controller
+    public class PropertyTypesController : AuthController
     {
         private RealEstateEntities db = new RealEstateEntities();
-        private bool IsLogin()
-        {
-            return (Session.Count > 0 && Session["Type"].Equals("Admin"));
-        }
 
         // GET: PropertyTypes
         public ActionResult Index()
         {
-            if (!IsLogin())
+            if (!IsAdminLogin())
             {
                 return RedirectToAction("Index", "Admin");
             }
@@ -32,7 +28,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: PropertyTypes/Details/5
         public ActionResult Details(int? id)
         {
-            if (!IsLogin())
+            if (!IsAdminLogin())
             {
                 return RedirectToAction("Index", "Admin");
             }
@@ -52,7 +48,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: PropertyTypes/Create
         public ActionResult Create()
         {
-            if (!IsLogin())
+            if (!IsAdminLogin())
             {
                 return RedirectToAction("Index", "Admin");
             }
@@ -67,7 +63,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,NAME")] PROPERTY_TYPE pROPERTY_TYPE)
         {
-            if (!IsLogin())
+            if (!IsAdminLogin())
             {
                 return RedirectToAction("Index", "Admin");
             }
@@ -85,7 +81,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: PropertyTypes/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (!IsLogin())
+            if (!IsAdminLogin())
             {
                 return RedirectToAction("Index", "Admin");
             }
@@ -109,7 +105,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,NAME")] PROPERTY_TYPE pROPERTY_TYPE)
         {
-            if (!IsLogin())
+            if (!IsAdminLogin())
             {
                 return RedirectToAction("Index", "Admin");
             }
@@ -126,7 +122,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: PropertyTypes/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (!IsLogin())
+            if (!IsAdminLogin())
             {
                 return RedirectToAction("Index", "Admin");
             }
@@ -148,7 +144,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            if (!IsLogin())
+            if (!IsAdminLogin())
             {
                 return RedirectToAction("Index", "Admin");
             }

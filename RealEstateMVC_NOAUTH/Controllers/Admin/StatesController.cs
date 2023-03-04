@@ -10,18 +10,14 @@ using RealEstateMVC_NOAUTH.Models;
 
 namespace RealEstateMVC_NOAUTH.Controllers.Admin
 {
-    public class StatesController : Controller
+    public class StatesController : AuthController
     {
         private RealEstateEntities db = new RealEstateEntities();
-        private bool IsLogin()
-        {
-            return (Session.Count > 0 && Session["Type"].Equals("Admin"));
-        }
 
         // GET: States
         public ActionResult Index()
         {
-            if (!IsLogin())
+            if (!IsAdminLogin())
             {
                 return RedirectToAction("Index", "Admin");
             }
@@ -33,7 +29,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: States/Details/5
         public ActionResult Details(int? id)
         {
-            if (!IsLogin())
+            if (!IsAdminLogin())
             {
                 return RedirectToAction("Index", "Admin");
             }
@@ -53,7 +49,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: States/Create
         public ActionResult Create()
         {
-            if (!IsLogin())
+            if (!IsAdminLogin())
             {
                 return RedirectToAction("Index", "Admin");
             }
@@ -69,7 +65,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,NAME,COUNTRY_ID")] STATE sTATE)
         {
-            if (!IsLogin())
+            if (!IsAdminLogin())
             {
                 return RedirectToAction("Index", "Admin");
             }
@@ -88,7 +84,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: States/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (!IsLogin())
+            if (!IsAdminLogin())
             {
                 return RedirectToAction("Index", "Admin");
             }
@@ -113,7 +109,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,NAME,COUNTRY_ID")] STATE sTATE)
         {
-            if (!IsLogin())
+            if (!IsAdminLogin())
             {
                 return RedirectToAction("Index", "Admin");
             }
@@ -131,7 +127,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: States/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (!IsLogin())
+            if (!IsAdminLogin())
             {
                 return RedirectToAction("Index", "Admin");
             }
@@ -153,7 +149,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            if (!IsLogin())
+            if (!IsAdminLogin())
             {
                 return RedirectToAction("Index", "Admin");
             }

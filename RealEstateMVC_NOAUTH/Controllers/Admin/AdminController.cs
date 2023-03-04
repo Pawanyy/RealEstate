@@ -9,20 +9,15 @@ using System.Web.Mvc;
 
 namespace RealEstateMVC_NOAUTH.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : AuthController
     {
         // GET: Admin
 
         private RealEstateEntities db = new RealEstateEntities();
 
-        private bool IsLogin()
-        {
-            return (Session.Count > 0 && Session["Type"].Equals("Admin"));
-        }
-
         public ActionResult Index()
         {
-            if (IsLogin())
+            if (IsAdminLogin())
             {
                 return RedirectToAction("Dashboard");
             }
@@ -59,7 +54,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
 
         public ActionResult Dashboard()
         {
-            if (!IsLogin())
+            if (!IsAdminLogin())
             {
                 return RedirectToAction("Index");
             }
@@ -69,7 +64,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
 
         public ActionResult Profile()
         {
-            if (!IsLogin())
+            if (!IsAdminLogin())
             {
                 return RedirectToAction("Index");
             }
@@ -87,7 +82,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
         [HttpPost]
         public ActionResult Profile([Bind(Include = "ID,USERNAME,PASSWORD")] ADMIN aDMIN)
         {
-            if (!IsLogin())
+            if (!IsAdminLogin())
             {
                 return RedirectToAction("Index");
             }
