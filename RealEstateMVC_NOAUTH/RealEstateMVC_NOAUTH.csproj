@@ -138,6 +138,7 @@
     <Compile Include="Controllers\Admin\PropertyTypesController.cs" />
     <Compile Include="Controllers\Admin\StatesController.cs" />
     <Compile Include="Controllers\Admin\UsersController.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RemoteController.cs" />
     <Compile Include="Controllers\User\UserController.cs" />
@@ -515,7 +516,9 @@
     <Content Include="Views\User\AnsweredQuery.cshtml" />
     <Content Include="Views\User\AskedQuery.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Auth\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
     <Content Include="Content\bootstrap.rtl.css.map" />
