@@ -22,6 +22,20 @@
         .sidebar div ul li.nav-item {
             margin: 10px 20px !important;
         }
+
+        .page-content {
+            min-height: 50vh;
+        }
+        
+        .form-group {
+            margin-bottom: 5px !important;
+        }
+
+        input[type=submit] {
+            background-color: #448dfa;
+            color: white;
+        }
+
     </style>
     <nav class="navbar sticky-top navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary">
         <div class="container">
@@ -113,8 +127,10 @@
                 </div>
             </nav>
 
-            <main role="main" class="col-md-9 ml-sm-auto pt-3 px-4">
-                @RenderBody()
+            <main role="main" class="col-md-9 ml-sm-auto px-4">
+                <div class="page-content px-4 pt-2 pb-4 bg-white rounded">
+                    @RenderBody()
+                </div>
             </main>
         </div>
 
