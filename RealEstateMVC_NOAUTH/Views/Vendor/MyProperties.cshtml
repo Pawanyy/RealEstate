@@ -18,6 +18,9 @@
     <table class="table table-bordered table-striped">
         <tr>
             <th>
+                Sr No
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.NAME)
             </th>
             <th>
@@ -97,10 +100,12 @@
             </th>
             <th></th>
         </tr>
-
+        @{ int i = 0; }
         @foreach (var item in Model)
         {
+            i++;
             <tr>
+                <td>@i</td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NAME)
                 </td>

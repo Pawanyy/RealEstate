@@ -10,6 +10,7 @@
 <div class="table-responsive">
     <table class="table">
         <tr>
+            <th>Sr No</th>
             <th>
                 @Html.DisplayNameFor(model => model.QUESTION)
             </th>
@@ -29,10 +30,12 @@
                 User Data
             </th>
         </tr>
-
+        @{ int i = 0; }
         @foreach (var item in Model)
         {
+            i++;
             <tr>
+                <td>@i</td>
                 <td>
                     @Html.DisplayFor(modelItem => item.QUESTION)
                 </td>
