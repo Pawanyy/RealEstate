@@ -9,23 +9,13 @@ using System.Web.Mvc;
 
 namespace RealEstateMVC_NOAUTH.Controllers.User
 {
-    public class UserController : Controller
+    public class UserController : AuthController
     {
         RealEstateEntities db = new RealEstateEntities();
 
-        private bool IsLogin()
-        {
-            return (Session.Count > 0 && Session["Type"].Equals("User"));
-        }
-
-        private int getUserID()
-        {
-            return int.Parse(Session["userId"].ToString());
-        }
-
         public ActionResult Index()
         {
-            if (!IsLogin())
+            if (!IsUserLogin())
             {
                 return RedirectToAction("Login");
             }
@@ -36,7 +26,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.User
         // GET: User
         public ActionResult Login()
         {
-            if (IsLogin())
+            if (IsUserLogin())
             {
                 return RedirectToAction("Dashboard");
             }
@@ -101,7 +91,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.User
 
         public ActionResult Dashboard()
         {
-            if (!IsLogin())
+            if (!IsUserLogin())
             {
                 return RedirectToAction("Login");
             }
@@ -117,7 +107,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.User
 
         public ActionResult Profile()
         {
-            if (!IsLogin())
+            if (!IsUserLogin())
             {
                 return RedirectToAction("Login");
             }
@@ -137,7 +127,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.User
         [ValidateAntiForgeryToken]
         public ActionResult Profile([Bind(Include = "ID,EMAIL,PASSWORD,FULLNAME,MOBILE,ABOUT_ME,REGISTRATION_DATE")] USER uSER)
         {
-            if (!IsLogin())
+            if (!IsUserLogin())
             {
                 return RedirectToAction("Login");
             }
@@ -154,7 +144,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.User
         [HttpPost]
         public ActionResult SendQuery(string QUESTION, int ID)
         {
-            if (!IsLogin())
+            if (!IsUserLogin())
             {
                 return RedirectToAction("Login");
             }
@@ -180,7 +170,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.User
 
         public ActionResult AskedQuery()
         {
-            if (!IsLogin())
+            if (!IsUserLogin())
             {
                 return RedirectToAction("Login");
             }
@@ -196,7 +186,7 @@ namespace RealEstateMVC_NOAUTH.Controllers.User
 
         public ActionResult AnsweredQuery()
         {
-            if (!IsLogin())
+            if (!IsUserLogin())
             {
                 return RedirectToAction("Login");
             }
