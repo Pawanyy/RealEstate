@@ -28,6 +28,20 @@
     <link href="/assets/admin/css/style.css" rel="stylesheet">
 </head>
 <body>
+    <style>
+        main {
+            min-height: 70vh;
+        }
+        
+        .form-group {
+            margin-bottom: 5px !important;
+        }
+
+        input[type=submit] {
+            background-color: #448dfa;
+            color: white;
+        }
+    </style>
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -194,7 +208,11 @@
             </nav>
         </div><!-- End Page Title -->
 
-        @RenderBody()
+        <div class="card">
+            <div class="card-body pt-3">
+                @RenderBody()
+            </div>
+        </div>
 
     </main><!-- End #main -->
 
