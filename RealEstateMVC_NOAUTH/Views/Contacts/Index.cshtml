@@ -9,6 +9,7 @@
 
 <table class="table">
     <tr>
+        <th>Sr No</th>
         <th>
             @Html.DisplayNameFor(model => model.NAME)
         </th>
@@ -29,31 +30,34 @@
         </th>
         <th>Action</th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EMAIL)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SUBJECT)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PHONE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MESSAGE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DATE)
-        </td>
-        <td>
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @{ int i = 0; }
+    @foreach (var item in Model)
+    {
+        i++;
+        <tr>
+            <td>@i</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EMAIL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SUBJECT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PHONE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MESSAGE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DATE)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>
