@@ -11,24 +11,14 @@ using System.Web.Mvc;
 
 namespace RealEstateMVC_NOAUTH.Controllers
 {
-    public class VendorController : Controller
+    public class VendorController : AuthController
     {
         // GET: Vendor
         RealEstateEntities db = new RealEstateEntities();
 
-        private bool IsLogin()
-        {
-            return (Session.Count > 0 && Session["Type"].Equals("Vendor"));
-        }
-
-        private int getUserID()
-        {
-            return int.Parse(Session["userId"].ToString());
-        }
-
         public ActionResult Index()
         {
-            if (!IsLogin())
+            if (!IsVendorLogin())
             {
                 return RedirectToAction("Login");
             }
@@ -39,7 +29,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
         #region VendorAuth
         public ActionResult Login()
         {
-            if (IsLogin())
+            if (IsVendorLogin())
             {
                 return RedirectToAction("Dashboard");
             }
@@ -111,7 +101,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
         #endregion VendorAuth
         public ActionResult Dashboard()
         {
-            if (!IsLogin())
+            if (!IsVendorLogin())
             {
                 return RedirectToAction("Login");
             }
@@ -121,7 +111,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
 
         public ActionResult Profile()
         {
-            if (!IsLogin())
+            if (!IsVendorLogin())
             {
                 return RedirectToAction("Login");
             }
@@ -141,7 +131,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Profile([Bind(Include = "ID,EMAIL,PASSWORD,FULLNAME,MOBILE,ABOUT_ME,REGISTRATION_DATE")] USER uSER)
         {
-            if (!IsLogin())
+            if (!IsVendorLogin())
             {
                 return RedirectToAction("Login");
             }
@@ -158,7 +148,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
         #region Property
         public ActionResult MyProperties()
         {
-            if (!IsLogin())
+            if (!IsVendorLogin())
             {
                 return RedirectToAction("Login");
             }
@@ -170,7 +160,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
 
         public ActionResult AddProperty()
         {
-            if (!IsLogin())
+            if (!IsVendorLogin())
             {
                 return RedirectToAction("Login");
             }
@@ -189,7 +179,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
         public ActionResult AddProperty([Bind(Include = "NAME,DESCR,PROPERTY_TYPE_ID,STATUS_ID,LOCATION,BEDROOMS,BATHROOMS,FLOORS,GARAGES,AREA,PRICE,BEFORE_PRICE_LABEL,AFTER_PRICE_LABEL,FEATURES,IMAGE_1,IMAGE_2,IMAGE_3,IMAGE_4,ADDRESS,COUNTRY_ID,STATE_ID,CITY_ID,POSTAL_CODE,NEIGHBORHOOD")] PROPERTY pROPERTY)
         {
 
-            if (!IsLogin())
+            if (!IsVendorLogin())
             {
                 return RedirectToAction("Login");
             }
@@ -277,7 +267,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
 
         public ActionResult EditProperty(int? id)
         {
-            if (!IsLogin())
+            if (!IsVendorLogin())
             {
                 return RedirectToAction("Login");
             }
@@ -305,7 +295,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
         public ActionResult EditProperty([Bind(Include = "ID,NAME,DESCR,PROPERTY_TYPE_ID,STATUS_ID,LOCATION,BEDROOMS,BATHROOMS,FLOORS,GARAGES,AREA,PRICE,BEFORE_PRICE_LABEL,AFTER_PRICE_LABEL,FEATURES,IMG_1,IMG_2,IMG_3,IMG_4,IMAGE_1,IMAGE_2,IMAGE_3,IMAGE_4,ADDRESS,COUNTRY_ID,STATE_ID,CITY_ID,POSTAL_CODE,NEIGHBORHOOD,ADDED_BY_ID,ADDED_DATE")] PROPERTY pROPERTY)
         {
 
-            if (!IsLogin())
+            if (!IsVendorLogin())
             {
                 return RedirectToAction("Login");
             }
@@ -404,7 +394,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
 
         public ActionResult DetailsProperty(int? id)
         {
-            if (!IsLogin())
+            if (!IsVendorLogin())
             {
                 return RedirectToAction("Login");
             }
@@ -423,7 +413,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
 
         public ActionResult DeleteProperty(int? id)
         {
-            if (!IsLogin())
+            if (!IsVendorLogin())
             {
                 return RedirectToAction("Login");
             }
@@ -455,7 +445,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
         #region Query
         public ActionResult ReceivedQuery()
         {
-            if (!IsLogin())
+            if (!IsVendorLogin())
             {
                 return RedirectToAction("Login");
             }
@@ -471,7 +461,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
 
         public ActionResult AnsweredQuery()
         {
-            if (!IsLogin())
+            if (!IsVendorLogin())
             {
                 return RedirectToAction("Login");
             }
@@ -487,7 +477,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
 
         public ActionResult AnswerQuery(int? id)
         {
-            if (!IsLogin())
+            if (!IsVendorLogin())
             {
                 return RedirectToAction("Login");
             }
@@ -508,7 +498,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AnswerQuery([Bind(Include = "ID,QUESTION,ANSWER,PROPERTY_ID,USER_ID,VENDOR_ID,Q_DATE")] PROPERTY_QUERY pROPERTY_QUERY)
         {
-            if (!IsLogin())
+            if (!IsVendorLogin())
             {
                 return RedirectToAction("Login");
             }

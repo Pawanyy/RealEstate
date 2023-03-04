@@ -13,6 +13,11 @@ namespace RealEstateMVC_NOAUTH.Controllers
             return (Session.Count > 0 && Session["Type"].Equals("User"));
         }
 
+        public bool IsVendorLogin()
+        {
+            return (Session.Count > 0 && Session["Type"].Equals("Vendor"));
+        }
+
         public int getUserID()
         {
             return int.Parse(Session["userId"].ToString());
