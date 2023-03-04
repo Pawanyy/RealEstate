@@ -11,12 +11,17 @@
         }
     </style>
     <h2 class="text-center mb-5">Login</h2>
-    <div class="row" style="min-height: 45vh;">
-        <div class="col-6 d-flex justify-content-center align-items-center border-right">
-            @Html.ActionLink("User Login", "Login", "User", new { area = "" }, new { @class = "btn btn-primary"})
-        </div>
-        <div class="col-6 d-flex justify-content-center align-items-center">
-            @Html.ActionLink("Vendor Login", "Login", "Vendor", new { area = "" }, new { @class = "btn btn-primary" })
+    <div style="min-height: 45vh;">
+        <div class="row" style="min-height: 30vh;">
+            <div class="col-4 d-flex justify-content-center align-items-center border-right">
+                @Html.ActionLink("User Login", "Login", "User", new { area = "" }, new { @class = "btn btn-primary" })
+            </div>
+            <div class="col-4 d-flex justify-content-center align-items-center border-right">
+                @Html.ActionLink("Vendor Login", "Login", "Vendor", new { area = "" }, new { @class = "btn btn-info" })
+            </div>
+            <div class="col-4 d-flex justify-content-center align-items-center">
+                @Html.ActionLink("Admin Login", "Index", "Admin", new { area = "" }, new { @class = "btn btn-danger" })
+            </div>
         </div>
     </div>
 </section>
