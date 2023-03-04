@@ -7,7 +7,7 @@
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("EditProperty", "Vendor", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -33,7 +33,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PROPERTY_TYPE_ID, "PROPERTY_TYPE_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PROPERTY_TYPE_ID, "Property Type", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("PROPERTY_TYPE_ID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.PROPERTY_TYPE_ID, "", new { @class = "text-danger" })
@@ -41,7 +41,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.STATUS_ID, "STATUS_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.STATUS_ID, "Property Status", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("STATUS_ID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.STATUS_ID, "", new { @class = "text-danger" })
@@ -131,32 +131,32 @@
         <div class="form-group">
             @Html.LabelFor(model => model.IMG_1, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.IMG_1, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IMG_1, "", new { @class = "text-danger" })
+                <input type="file" name="IMAGE_1" class="form-control" />
+                <input type="hidden" name="IMG_1" value="@Html.DisplayFor(model => model.IMG_1).ToString()" />
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.IMG_2, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.IMG_2, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IMG_2, "", new { @class = "text-danger" })
+                <input type="file" name="IMAGE_2" class="form-control" />
+                <input type="hidden" name="IMG_2" value="@Html.DisplayFor(model => model.IMG_2).ToString()" />
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.IMG_3, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.IMG_3, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IMG_3, "", new { @class = "text-danger" })
+                <input type="file" name="IMAGE_3" class="form-control" />
+                <input type="hidden" name="IMG_3" value="@Html.DisplayFor(model => model.IMG_3).ToString()" />
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.IMG_4, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.IMG_4, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IMG_4, "", new { @class = "text-danger" })
+                <input type="file" name="IMAGE_3" class="form-control" />
+                <input type="hidden" name="IMG_4" value="@Html.DisplayFor(model => model.IMG_4).ToString()" />
             </div>
         </div>
 
@@ -169,7 +169,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.COUNTRY_ID, "COUNTRY_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.COUNTRY_ID, "Country", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("COUNTRY_ID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.COUNTRY_ID, "", new { @class = "text-danger" })
@@ -177,7 +177,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.STATE_ID, "STATE_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.STATE_ID, "State", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("STATE_ID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.STATE_ID, "", new { @class = "text-danger" })
@@ -185,7 +185,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CITY_ID, "CITY_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CITY_ID, "City", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("CITY_ID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CITY_ID, "", new { @class = "text-danger" })
@@ -205,22 +205,8 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.NEIGHBORHOOD, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.NEIGHBORHOOD, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ADDED_BY_ID, "ADDED_BY_ID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ADDED_BY_ID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ADDED_BY_ID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ADDED_DATE, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ADDED_DATE, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ADDED_DATE, "", new { @class = "text-danger" })
+                <input type="hidden" name="ADDED_BY_ID" value="@Html.DisplayFor(model => model.ADDED_BY_ID).ToString()" />
+                <input type="hidden" name="ADDED_DATE" value="@Html.DisplayFor(model => model.ADDED_DATE).ToString()" />
             </div>
         </div>
 

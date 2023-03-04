@@ -258,7 +258,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
                         pROPERTY.IMAGE_3.SaveAs(path_3);
                         pROPERTY.IMAGE_4.SaveAs(path_4);
                     }
-                    return RedirectToAction("Index");
+                    return RedirectToAction("MyProperties");
                 }
                 else
                 {
@@ -302,8 +302,9 @@ namespace RealEstateMVC_NOAUTH.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditProperty([Bind(Include = "ID,NAME,DESCR,PROPERTY_TYPE_ID,STATUS_ID,LOCATION,BEDROOMS,BATHROOMS,FLOORS,GARAGES,AREA,PRICE,BEFORE_PRICE_LABEL,AFTER_PRICE_LABEL,FEATURES,IMG_1,IMG_2,IMG_3,IMG_4,ADDRESS,COUNTRY_ID,STATE_ID,CITY_ID,POSTAL_CODE,NEIGHBORHOOD,ADDED_BY_ID,ADDED_DATE")] PROPERTY pROPERTY)
+        public ActionResult EditProperty([Bind(Include = "ID,NAME,DESCR,PROPERTY_TYPE_ID,STATUS_ID,LOCATION,BEDROOMS,BATHROOMS,FLOORS,GARAGES,AREA,PRICE,BEFORE_PRICE_LABEL,AFTER_PRICE_LABEL,FEATURES,IMG_1,IMG_2,IMG_3,IMG_4,IMAGE_1,IMAGE_2,IMAGE_3,IMAGE_4,ADDRESS,COUNTRY_ID,STATE_ID,CITY_ID,POSTAL_CODE,NEIGHBORHOOD,ADDED_BY_ID,ADDED_DATE")] PROPERTY pROPERTY)
         {
+
             if (!IsLogin())
             {
                 return RedirectToAction("Login");
@@ -311,9 +312,86 @@ namespace RealEstateMVC_NOAUTH.Controllers
 
             if (ModelState.IsValid)
             {
-                db.Entry(pROPERTY).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                string path_1 = "", path_2 = "", path_3 = "", path_4 = "";
+                string error = "";
+
+                if(pROPERTY.IMAGE_1 != null && pROPERTY.IMAGE_1.ContentLength > 0)
+                {
+                    // Image 1
+                    string filename_1 = Path.GetFileName(pROPERTY.IMAGE_1.FileName);
+                    string _filename_1 = DateTime.Now.ToString("hhmmssfff") + filename_1;
+                    path_1 = Path.Combine(Server.MapPath("~/Image/"), _filename_1);
+
+                    pROPERTY.IMG_1 = "~/Image/" + _filename_1;
+                    
+                    if (pROPERTY.IMAGE_1.ContentLength > 1000000)
+                    {
+                        error += "Image 1 must be less than or equal to 1 MB<br>";
+                    }
+                }
+
+                if (pROPERTY.IMAGE_2 != null && pROPERTY.IMAGE_2.ContentLength > 0)
+                {
+                    // Image 2
+                    string filename_2 = Path.GetFileName(pROPERTY.IMAGE_2.FileName);
+                    string _filename_2 = DateTime.Now.ToString("hhmmssfff") + filename_2;
+                    path_2 = Path.Combine(Server.MapPath("~/Image/"), _filename_2);
+
+                    pROPERTY.IMG_2 = "~/Image/" + _filename_2;
+
+                    if (pROPERTY.IMAGE_2.ContentLength > 1000000)
+                    {
+                        error += "Image 2 must be less than or equal to 1 MB<br>";
+                    }
+                }
+
+
+                if (pROPERTY.IMAGE_3 != null && pROPERTY.IMAGE_3.ContentLength > 0)
+                {
+                    // Image 3
+                    string filename_3 = Path.GetFileName(pROPERTY.IMAGE_3.FileName);
+                    string _filename_3 = DateTime.Now.ToString("hhmmssfff") + filename_3;
+                    path_3 = Path.Combine(Server.MapPath("~/Image/"), _filename_3);
+
+                    pROPERTY.IMG_3 = "~/Image/" + _filename_3;
+
+                    if (pROPERTY.IMAGE_3.ContentLength > 1000000)
+                    {
+                        error += "Image 3 must be less than or equal to 1 MB<br>";
+                    }
+                }
+
+                if (pROPERTY.IMAGE_4 != null && pROPERTY.IMAGE_4.ContentLength > 0)
+                {
+                    // Image 4
+                    string filename_4 = Path.GetFileName(pROPERTY.IMAGE_4.FileName);
+                    string _filename_4 = DateTime.Now.ToString("hhmmssfff") + filename_4;
+                    path_4 = Path.Combine(Server.MapPath("~/Image/"), _filename_4);
+
+                    pROPERTY.IMG_4 = "~/Image/" + _filename_4;
+
+                    if (pROPERTY.IMAGE_4.ContentLength > 1000000)
+                    {
+                        error += "Image 4 must be less than or equal to 1 MB<br>";
+                    }
+                }
+
+                if (String.IsNullOrEmpty(error))
+                {
+                    db.Entry(pROPERTY).State = EntityState.Modified;
+                    if (db.SaveChanges() > 0)
+                    {
+                        if (!String.IsNullOrEmpty(path_1)) pROPERTY.IMAGE_1.SaveAs(path_1);
+                        if (!String.IsNullOrEmpty(path_2)) pROPERTY.IMAGE_2.SaveAs(path_2);
+                        if (!String.IsNullOrEmpty(path_3)) pROPERTY.IMAGE_3.SaveAs(path_3);
+                        if (!String.IsNullOrEmpty(path_4)) pROPERTY.IMAGE_4.SaveAs(path_4);
+                    }
+                    return RedirectToAction("MyProperties");
+                }
+                else
+                {
+                    ViewBag.msg = error;
+                }
             }
             ViewBag.CITY_ID = new SelectList(db.CITies, "ID", "NAME", pROPERTY.CITY_ID);
             ViewBag.COUNTRY_ID = new SelectList(db.COUNTRies, "ID", "NAME", pROPERTY.COUNTRY_ID);
@@ -374,6 +452,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
 
         #endregion Property
 
+        #region Query
         public ActionResult ReceivedQuery()
         {
             if (!IsLogin())
@@ -444,6 +523,7 @@ namespace RealEstateMVC_NOAUTH.Controllers
             return View(pROPERTY_QUERY);
         }
 
+        #endregion Query
 
         protected override void Dispose(bool disposing)
         {
