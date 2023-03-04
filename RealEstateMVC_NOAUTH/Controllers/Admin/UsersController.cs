@@ -72,9 +72,22 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
 
             if (ModelState.IsValid)
             {
-                uSER.REGISTRATION_DATE = DateTime.Now;
-                db.USERS.Add(uSER);
-                db.SaveChanges();
+                var usr = db.USERS.Where(m => m.EMAIL.Equals(uSER.EMAIL)).SingleOrDefault();
+                if (usr == null)
+                {
+                    uSER.REGISTRATION_DATE = DateTime.Now;
+                    db.USERS.Add(uSER);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    ViewBag.msg = @"<div class=""alert alert-danger alert-dismissible fade show"" role=""alert"">
+                                      <strong>Error! </strong>Account with Email Exist
+                                      <button type=""button"" class=""btn-close"" data-bs-dismiss=""alert"" aria-label=""Close""></button>
+                                    </div>";
+                    return View(uSER);
+                }
+
                 return RedirectToAction("Index");
             }
 

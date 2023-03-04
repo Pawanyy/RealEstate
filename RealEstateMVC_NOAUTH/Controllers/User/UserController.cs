@@ -74,15 +74,26 @@ namespace RealEstateMVC_NOAUTH.Controllers.User
         {
             if (ModelState.IsValid)
             {
-                uSER.REGISTRATION_DATE = DateTime.Now;
-                uSER.ROLE_ID = db.USER_ROLE.Where(m => m.NAME.Equals("User")).Single().ID;
-                db.USERS.Add(uSER);
-                db.SaveChanges();
-
-                ViewBag.msg = @"<div class=""alert alert-success alert-dismissible fade show"" role=""alert"">
+                var usr = db.USERS.Where (m => m.EMAIL.Equals(uSER.EMAIL)).SingleOrDefault();
+                if (usr == null)
+                {
+                    uSER.REGISTRATION_DATE = DateTime.Now;
+                    uSER.ROLE_ID = db.USER_ROLE.Where(m => m.NAME.Equals("User")).Single().ID;
+                    db.USERS.Add(uSER);
+                    db.SaveChanges();
+                    
+                    ViewBag.msg = @"<div class=""alert alert-success alert-dismissible fade show"" role=""alert"">
                                       <strong>Success! </strong>Account Created
                                       <button type=""button"" class=""btn-close"" data-bs-dismiss=""alert"" aria-label=""Close""></button>
                                     </div>";
+                } else
+                {
+                    ViewBag.msg = @"<div class=""alert alert-danger alert-dismissible fade show"" role=""alert"">
+                                      <strong>Error! </strong>Account with Email Exist
+                                      <button type=""button"" class=""btn-close"" data-bs-dismiss=""alert"" aria-label=""Close""></button>
+                                    </div>";
+                }
+
                 return View();
             }
 
