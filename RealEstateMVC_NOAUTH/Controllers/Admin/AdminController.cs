@@ -87,6 +87,11 @@ namespace RealEstateMVC_NOAUTH.Controllers
         [HttpPost]
         public ActionResult Profile([Bind(Include = "ID,USERNAME,PASSWORD")] ADMIN aDMIN)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(aDMIN).State = EntityState.Modified;

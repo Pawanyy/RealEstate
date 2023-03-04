@@ -13,16 +13,30 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
     public class CountriesController : Controller
     {
         private RealEstateEntities db = new RealEstateEntities();
+        private bool IsLogin()
+        {
+            return (Session.Count > 0 && Session["Type"].Equals("Admin"));
+        }
 
         // GET: Countries
         public ActionResult Index()
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             return View(db.COUNTRies.ToList());
         }
 
         // GET: Countries/Details/5
         public ActionResult Details(int? id)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -38,6 +52,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: Countries/Create
         public ActionResult Create()
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             return View();
         }
 
@@ -48,6 +67,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,NAME")] COUNTRY cOUNTRY)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             if (ModelState.IsValid)
             {
                 db.COUNTRies.Add(cOUNTRY);
@@ -61,6 +85,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: Countries/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -80,6 +109,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,NAME")] COUNTRY cOUNTRY)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(cOUNTRY).State = EntityState.Modified;
@@ -92,6 +126,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: Countries/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -109,6 +148,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             COUNTRY cOUNTRY = db.COUNTRies.Find(id);
             db.COUNTRies.Remove(cOUNTRY);
             db.SaveChanges();

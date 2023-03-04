@@ -13,16 +13,30 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
     public class PropertyTypesController : Controller
     {
         private RealEstateEntities db = new RealEstateEntities();
+        private bool IsLogin()
+        {
+            return (Session.Count > 0 && Session["Type"].Equals("Admin"));
+        }
 
         // GET: PropertyTypes
         public ActionResult Index()
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             return View(db.PROPERTY_TYPE.ToList());
         }
 
         // GET: PropertyTypes/Details/5
         public ActionResult Details(int? id)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -38,6 +52,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: PropertyTypes/Create
         public ActionResult Create()
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             return View();
         }
 
@@ -48,6 +67,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,NAME")] PROPERTY_TYPE pROPERTY_TYPE)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             if (ModelState.IsValid)
             {
                 db.PROPERTY_TYPE.Add(pROPERTY_TYPE);
@@ -61,6 +85,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: PropertyTypes/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -80,6 +109,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,NAME")] PROPERTY_TYPE pROPERTY_TYPE)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(pROPERTY_TYPE).State = EntityState.Modified;
@@ -92,6 +126,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: PropertyTypes/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -109,6 +148,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             PROPERTY_TYPE pROPERTY_TYPE = db.PROPERTY_TYPE.Find(id);
             db.PROPERTY_TYPE.Remove(pROPERTY_TYPE);
             db.SaveChanges();

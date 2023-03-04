@@ -13,10 +13,19 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
     public class UsersController : Controller
     {
         private RealEstateEntities db = new RealEstateEntities();
+        private bool IsLogin()
+        {
+            return (Session.Count > 0 && Session["Type"].Equals("Admin"));
+        }
 
         // GET: Users
         public ActionResult Index()
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             var uSERS = db.USERS.Include(u => u.USER_ROLE);
             return View(uSERS.ToList());
         }
@@ -24,6 +33,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: Users/Details/5
         public ActionResult Details(int? id)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -39,6 +53,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: Users/Create
         public ActionResult Create()
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             ViewBag.ROLE_ID = new SelectList(db.USER_ROLE, "ID", "NAME");
             return View();
         }
@@ -50,6 +69,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,EMAIL,PASSWORD,FULLNAME,MOBILE,ROLE_ID,ABOUT_ME")] USER uSER)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             if (ModelState.IsValid)
             {
                 uSER.REGISTRATION_DATE = DateTime.Now;
@@ -65,6 +89,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: Users/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -85,6 +114,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,EMAIL,PASSWORD,FULLNAME,MOBILE,ROLE_ID,ABOUT_ME,REGISTRATION_DATE")] USER uSER)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(uSER).State = EntityState.Modified;
@@ -98,6 +132,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: Users/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -115,6 +154,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             USER uSER = db.USERS.Find(id);
             db.USERS.Remove(uSER);
             db.SaveChanges();

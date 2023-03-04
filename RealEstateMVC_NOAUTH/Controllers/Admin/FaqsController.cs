@@ -13,16 +13,30 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
     public class FaqsController : Controller
     {
         private RealEstateEntities db = new RealEstateEntities();
+        private bool IsLogin()
+        {
+            return (Session.Count > 0 && Session["Type"].Equals("Admin"));
+        }
 
         // GET: Faqs
         public ActionResult Index()
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             return View(db.FAQS.ToList());
         }
 
         // GET: Faqs/Details/5
         public ActionResult Details(int? id)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -38,6 +52,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: Faqs/Create
         public ActionResult Create()
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             return View();
         }
 
@@ -48,6 +67,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,QUEST,ANSWER")] FAQ fAQ)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             if (ModelState.IsValid)
             {
                 db.FAQS.Add(fAQ);
@@ -61,6 +85,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: Faqs/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -80,6 +109,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,QUEST,ANSWER")] FAQ fAQ)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(fAQ).State = EntityState.Modified;
@@ -92,6 +126,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: Faqs/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -109,6 +148,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             FAQ fAQ = db.FAQS.Find(id);
             db.FAQS.Remove(fAQ);
             db.SaveChanges();

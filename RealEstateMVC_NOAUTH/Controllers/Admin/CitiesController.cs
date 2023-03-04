@@ -14,9 +14,19 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
     {
         private RealEstateEntities db = new RealEstateEntities();
 
+        private bool IsLogin()
+        {
+            return (Session.Count > 0 && Session["Type"].Equals("Admin"));
+        }
+
         // GET: Cities
         public ActionResult Index()
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             var cITies = db.CITies.Include(c => c.STATE);
             return View(cITies.ToList());
         }
@@ -24,6 +34,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: Cities/Details/5
         public ActionResult Details(int? id)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -39,6 +54,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: Cities/Create
         public ActionResult Create()
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             ViewBag.STATE_ID = new SelectList(db.STATEs, "ID", "NAME");
             return View();
         }
@@ -50,6 +70,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,NAME,STATE_ID")] CITY cITY)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             if (ModelState.IsValid)
             {
                 db.CITies.Add(cITY);
@@ -64,6 +89,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: Cities/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -84,6 +114,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,NAME,STATE_ID")] CITY cITY)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(cITY).State = EntityState.Modified;
@@ -97,6 +132,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         // GET: Cities/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -114,6 +154,11 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!IsLogin())
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             CITY cITY = db.CITies.Find(id);
             db.CITies.Remove(cITY);
             db.SaveChanges();
