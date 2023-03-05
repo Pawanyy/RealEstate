@@ -16,8 +16,8 @@ namespace RealEstateMVC_NOAUTH.Models
         public string QUEST;
 
         [Required]
-        [DataType(DataType.Text)]
-        [StringLength(255, MinimumLength = 2)]
+        [DataType(DataType.MultilineText)]
+        [StringLength(1000, MinimumLength = 2)]
         [Display(Name = "Answer")]
         public string ANSWER;
     }
