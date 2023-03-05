@@ -175,11 +175,11 @@ namespace RealEstateMVC_NOAUTH.Controllers
                 return RedirectToAction("Login");
             }
 
-            ViewBag.CITY_ID = new SelectList(db.CITies, "ID", "NAME");
+            ViewBag.CITY_ID = new SelectList("");//new SelectList(db.CITies, "ID", "NAME");
             ViewBag.COUNTRY_ID = new SelectList(db.COUNTRies, "ID", "NAME");
             ViewBag.ADDED_BY_ID = new SelectList(db.USERS, "ID", "EMAIL");
             ViewBag.PROPERTY_TYPE_ID = new SelectList(db.PROPERTY_TYPE, "ID", "NAME");
-            ViewBag.STATE_ID = new SelectList(db.STATEs, "ID", "NAME");
+            ViewBag.STATE_ID = new SelectList(""); //new SelectList(db.STATEs, "ID", "NAME");
             ViewBag.STATUS_ID = new SelectList(db.PROPERTY_STATUS, "ID", "STATUS");
             return View();
         }
@@ -266,11 +266,11 @@ namespace RealEstateMVC_NOAUTH.Controllers
                 }
             }
 
-            ViewBag.CITY_ID = new SelectList(db.CITies, "ID", "NAME", pROPERTY.CITY_ID);
+            ViewBag.CITY_ID = new SelectList(db.CITies.Where(m => m.STATE_ID == pROPERTY.STATE_ID), "ID", "NAME", pROPERTY.CITY_ID);
             ViewBag.COUNTRY_ID = new SelectList(db.COUNTRies, "ID", "NAME", pROPERTY.COUNTRY_ID);
             ViewBag.ADDED_BY_ID = new SelectList(db.USERS, "ID", "EMAIL", pROPERTY.ADDED_BY_ID);
             ViewBag.PROPERTY_TYPE_ID = new SelectList(db.PROPERTY_TYPE, "ID", "NAME", pROPERTY.PROPERTY_TYPE_ID);
-            ViewBag.STATE_ID = new SelectList(db.STATEs, "ID", "NAME", pROPERTY.STATE_ID);
+            ViewBag.STATE_ID = new SelectList(db.STATEs.Where(m => m.COUNTRY_ID == pROPERTY.COUNTRY_ID), "ID", "NAME", pROPERTY.STATE_ID);
             ViewBag.STATUS_ID = new SelectList(db.PROPERTY_STATUS, "ID", "STATUS", pROPERTY.STATUS_ID);
             return View(pROPERTY);
         }
@@ -291,11 +291,11 @@ namespace RealEstateMVC_NOAUTH.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CITY_ID = new SelectList(db.CITies, "ID", "NAME", pROPERTY.CITY_ID);
+            ViewBag.CITY_ID = new SelectList(db.CITies.Where(m => m.STATE_ID == pROPERTY.STATE_ID), "ID", "NAME", pROPERTY.CITY_ID);
             ViewBag.COUNTRY_ID = new SelectList(db.COUNTRies, "ID", "NAME", pROPERTY.COUNTRY_ID);
             ViewBag.ADDED_BY_ID = new SelectList(db.USERS, "ID", "EMAIL", pROPERTY.ADDED_BY_ID);
             ViewBag.PROPERTY_TYPE_ID = new SelectList(db.PROPERTY_TYPE, "ID", "NAME", pROPERTY.PROPERTY_TYPE_ID);
-            ViewBag.STATE_ID = new SelectList(db.STATEs, "ID", "NAME", pROPERTY.STATE_ID);
+            ViewBag.STATE_ID = new SelectList(db.STATEs.Where(m => m.COUNTRY_ID == pROPERTY.COUNTRY_ID), "ID", "NAME", pROPERTY.STATE_ID);
             ViewBag.STATUS_ID = new SelectList(db.PROPERTY_STATUS, "ID", "STATUS", pROPERTY.STATUS_ID);
             return View(pROPERTY);
         }
@@ -393,11 +393,11 @@ namespace RealEstateMVC_NOAUTH.Controllers
                     ViewBag.msg = error;
                 }
             }
-            ViewBag.CITY_ID = new SelectList(db.CITies, "ID", "NAME", pROPERTY.CITY_ID);
+            ViewBag.CITY_ID = new SelectList(db.CITies.Where(m => m.STATE_ID == pROPERTY.STATE_ID), "ID", "NAME", pROPERTY.CITY_ID);
             ViewBag.COUNTRY_ID = new SelectList(db.COUNTRies, "ID", "NAME", pROPERTY.COUNTRY_ID);
             ViewBag.ADDED_BY_ID = new SelectList(db.USERS, "ID", "EMAIL", pROPERTY.ADDED_BY_ID);
             ViewBag.PROPERTY_TYPE_ID = new SelectList(db.PROPERTY_TYPE, "ID", "NAME", pROPERTY.PROPERTY_TYPE_ID);
-            ViewBag.STATE_ID = new SelectList(db.STATEs, "ID", "NAME", pROPERTY.STATE_ID);
+            ViewBag.STATE_ID = new SelectList(db.STATEs.Where(m => m.COUNTRY_ID == pROPERTY.COUNTRY_ID), "ID", "NAME", pROPERTY.STATE_ID);
             ViewBag.STATUS_ID = new SelectList(db.PROPERTY_STATUS, "ID", "STATUS", pROPERTY.STATUS_ID);
             return View(pROPERTY);
         }

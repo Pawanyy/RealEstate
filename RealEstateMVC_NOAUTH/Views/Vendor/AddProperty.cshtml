@@ -209,3 +209,41 @@
         </div>
     </div>
 }
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        $("#COUNTRY_ID").prepend("<option value=''>Select Country</option>");
+
+        $("#COUNTRY_ID")[0].selectedIndex = 0;
+
+        $("#COUNTRY_ID").change(function () {
+            console.log($("#COUNTRY_ID").val())
+            $.get("/Remote/GetStateList", {
+                CountryId: $("#COUNTRY_ID").val()
+            },
+            function(data) {
+                console.log(data);
+                $("#STATE_ID").empty();
+                $("#CITY_ID").empty();
+                $("#STATE_ID").append("<option value=''>Select State</option>")
+                $.each(data, function (index, row) {
+                    $("#STATE_ID").append("<option value='" + row.ID+"'>" + row.NAME + "</option>")
+                })
+            })
+        })
+
+        $("#STATE_ID").change(function () {
+            $.get("/Remote/GetCityList", {
+                StateId: $("#STATE_ID").val()
+            },
+            function (data) {
+                console.log(data);
+                $("#CITY_ID").empty();
+                $("#CITY_ID").append("<option value=''>Select City</option>")
+                $.each(data, function (index, row) {
+                    $("#CITY_ID").append("<option value='" + row.ID + "'>" + row.NAME + "</option>")
+                })
+            })
+        })
+    })
+</script>
