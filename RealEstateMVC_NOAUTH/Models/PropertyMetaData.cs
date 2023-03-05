@@ -115,9 +115,9 @@ namespace RealEstateMVC_NOAUTH.Models
         [Display(Name = "City")]
         public Nullable<int> CITY_ID;
 
-        [DataType(DataType.PostalCode)]
+        [DataType(DataType.PhoneNumber)]
         [Display(Name = "Postol Code")]
-        [StringLength(7, MinimumLength = 2)]
+        [StringLength(6, MinimumLength = 2)]
         public string POSTAL_CODE;
 
         [DataType(DataType.Text)]

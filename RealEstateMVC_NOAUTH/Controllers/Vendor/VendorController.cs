@@ -291,6 +291,9 @@ namespace RealEstateMVC_NOAUTH.Controllers
             {
                 return HttpNotFound();
             }
+            
+            pROPERTY.POSTAL_CODE = pROPERTY.POSTAL_CODE.Trim();
+
             ViewBag.CITY_ID = new SelectList(db.CITies.Where(m => m.STATE_ID == pROPERTY.STATE_ID), "ID", "NAME", pROPERTY.CITY_ID);
             ViewBag.COUNTRY_ID = new SelectList(db.COUNTRies, "ID", "NAME", pROPERTY.COUNTRY_ID);
             ViewBag.ADDED_BY_ID = new SelectList(db.USERS, "ID", "EMAIL", pROPERTY.ADDED_BY_ID);
