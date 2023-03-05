@@ -2,6 +2,41 @@
 @{
     ViewBag.Title = "Contact";
 }
+
+
+<style>
+    .form-group {
+        margin-bottom: 10px !important;
+    }
+
+        .form-group label {
+            margin-bottom: 5px
+        }
+
+    input, textarea {
+        max-width: 350px;
+    }
+
+    .contact-1 .contact-info .media i {
+        width: 50px;
+        font-size: 18px;
+        height: 50px;
+        line-height: 50px;
+        margin-right: 20px;
+    }
+
+    .media {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: start;
+        align-items: flex-start;
+    }
+
+    .media-body {
+        -ms-flex: 1;
+        flex: 1;
+    }
+</style>
 <main class="container" aria-labelledby="title">
 
     <nav aria-label="breadcrumb">
@@ -15,41 +50,7 @@
         <div class="container">
             <div class="main-title">
                 <h1>Contact Us</h1>
-                <p>We're here to answer any question you might have. <br />We look forward to hearing from you.</p>
             </div>
-            <style>
-                .form-group {
-                    margin-bottom: 10px !important;
-                }
-
-                .form-group label{
-                    margin-bottom:5px
-                }
-
-                input, textarea {
-                    max-width: 350px;
-                }
-
-                .contact-1 .contact-info .media i {
-                    width: 50px;
-                    font-size: 18px;
-                    height: 50px;
-                    line-height: 50px;
-                    margin-right: 20px;
-                }
-
-                .media {
-                    display: -ms-flexbox;
-                    display: flex;
-                    -ms-flex-align: start;
-                    align-items: flex-start;
-                }
-
-                .media-body {
-                    -ms-flex: 1;
-                    flex: 1;
-                }
-            </style>
 
             <div class="row">
                 <div class="col-lg-7 col-md-7 col-md-7">
@@ -58,6 +59,7 @@
                         @Html.AntiForgeryToken()
 
                     <div class="form-horizontal">
+                        <p>We're always happy to help. Whether you need assistance with buying, selling, or renting a property, our team is here to answer your questions.<br />Contact us today by phone, email, or through our website's contact form.</p>
                         <hr />
                         @Html.Raw(ViewBag.msg)
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
