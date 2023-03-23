@@ -169,8 +169,17 @@ namespace RealEstateMVC_NOAUTH.Controllers.Admin
             }
 
             USER uSER = db.USERS.Find(id);
+
+             var propertyQuries = db.PROPERTY_QUERY.Where(p => p.VENDOR_ID == id || p.USER_ID == id);
+
+            foreach(var property in propertyQuries.ToList())
+            {
+                db.PROPERTY_QUERY.Remove(property);
+            }
+
             db.USERS.Remove(uSER);
             db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
